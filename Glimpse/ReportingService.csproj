@@ -123,6 +123,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\UIConfigurationController.cs" />
     <Compile Include="Dtos\ConfigDto.cs" />
     <Compile Include="Dtos\ConfigurationDto.cs" />
     <Compile Include="Dtos\EmployeeDto.cs" />

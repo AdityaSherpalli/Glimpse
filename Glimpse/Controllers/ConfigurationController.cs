@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Web.Http;
+using System.Net;
+using System.Net.Http;
 using ReportingService.Services;
 using ReportingService.Dtos;
 
@@ -13,18 +15,22 @@ namespace ReportingService.Controllers
         {
             _jsonserializer = jsonserializer;
         }
-        public dynamic Get()
+        public HttpResponseMessage Get()
         {
             try
             {
-                return
-                    _jsonserializer.Deserialize
+                var reportsData = _jsonserializer.Deserialize
                                             <ConfigDto>
-                                            (System.IO.File.ReadAllText("ReportConfig.json"));
+                                            (System.IO.File.ReadAllText("F:\\summer intern\\Repo\\Glimpse\\Glimpse\\ReportConfig.json")).Reports;
+                if(reportsData==null)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.Conflict,"Unable To Fetch File Data");
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, reportsData);
             }
             catch (Exception e)
             {
-                return e;
+                return Request.CreateErrorResponse(HttpStatusCode.ServiceUnavailable,"INTERNAL SERVER PROBLEM");
             }
         }
     }
