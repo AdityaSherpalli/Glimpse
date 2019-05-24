@@ -1,0 +1,22 @@
+{
+  "Reports": [
+    {
+      "DisplayName": "Smith",
+      "ReportName": "Smith_report"
+    }
+  ],
+  "Configuration": [
+    {
+      "ReportName": "Smith_report",
+      "StoredProcedureName": "EmpNameWithA",
+      "Parameters": [
+        {
+          "Name": "@name",
+          "Type": "nvarchar(10)",
+          "PrePopulate": "true",
+          "StoredProcedureName": "getEmployees" //should return two columns Text(would be shown in UI)and Value(Backing field)
+        }
+      ]
+    }
+  ]
+}
