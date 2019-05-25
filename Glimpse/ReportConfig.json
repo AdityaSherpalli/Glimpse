@@ -2,12 +2,12 @@
   "Reports": [
     {
       "DisplayName": "Smith",
-      "ReportName": "Smith_report"
+      "ReportName": "emp"
     }
   ],
   "Configuration": [
     {
-      "ReportName": "Smith_report",
+      "ReportName": "emp",
       "StoredProcedureName": "EmpNameWithA",
       "Parameters": [
         {
