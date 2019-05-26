@@ -121,12 +121,14 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PopulateDDLController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\UIConfigurationController.cs" />
     <Compile Include="Dtos\ConfigDto.cs" />
     <Compile Include="Dtos\ConfigurationAndData.cs" />
     <Compile Include="Dtos\ConfigurationDto.cs" />
+    <Compile Include="Dtos\DdlDTO.cs" />
     <Compile Include="Dtos\EmployeeDto.cs" />
     <Compile Include="Dtos\SqlParamDto.cs" />
     <Compile Include="Enums\UIDisplayType.cs" />
