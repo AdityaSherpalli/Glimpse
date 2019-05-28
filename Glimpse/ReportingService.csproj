@@ -126,7 +126,6 @@
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\UIConfigurationController.cs" />
     <Compile Include="Dtos\ConfigDto.cs" />
-    <Compile Include="Dtos\ConfigurationAndData.cs" />
     <Compile Include="Dtos\ConfigurationDto.cs" />
     <Compile Include="Dtos\DdlDTO.cs" />
     <Compile Include="Dtos\EmployeeDto.cs" />
@@ -137,7 +136,6 @@
     </Compile>
     <Compile Include="Dtos\ReportDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\GetReportData.cs" />
     <Compile Include="Services\JsonSerializer.cs" />
   </ItemGroup>
   <ItemGroup>

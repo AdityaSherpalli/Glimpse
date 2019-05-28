@@ -18,33 +18,47 @@ namespace ReportingService.Controllers
         {
             return null;
         }
-        public dynamic Get(string SpName)
+        public HttpResponseMessage Get(string ReportName,string Parameter=null)
         {
             try
             {
                 var cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
                 SqlDataReader rdr;
                 var queryResult = new List<EmployeeDto>();
+                string SpName;
+                if(Parameter==null)
+                {
+                    SpName = "GetEmployeeDetails";
+                }
+                else
+                {
+                    SpName = "GetEmployeeDetailsByDept";
+                }
                 using (var con = new SqlConnection(cs))
                 {
                     using (var cmd = new SqlCommand(SpName, con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        if (SpName == "GetEmployeeDetailsByDept")
+                            cmd.Parameters.AddWithValue("@dept",Parameter);
                         con.Open();
                         rdr = cmd.ExecuteReader();
                         while (rdr.Read())
                         {
-                            queryResult.Add(new EmployeeDto { ID = Convert.ToInt16(rdr["empno"]),
-                                                              name = rdr["ename"].ToString(),
-                                                              position = rdr["job"].ToString() });
+                            queryResult.Add(new EmployeeDto
+                            {
+                                ID = Convert.ToInt16(rdr["empno"]),
+                                name = rdr["ename"].ToString(),
+                                position = rdr["job"].ToString()
+                            });
                         }
                     }
                 }
-                return queryResult;
+                return Request.CreateResponse(HttpStatusCode.OK,queryResult);
             }
             catch (Exception e)
             {
-                return e;
+                return Request.CreateErrorResponse(HttpStatusCode.ServiceUnavailable, "INTERNAL SERVER PROBLEM");
             }
         }
     }

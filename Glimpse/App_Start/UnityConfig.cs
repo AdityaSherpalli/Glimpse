@@ -12,7 +12,6 @@ namespace ReportingService
 			var container = new UnityContainer();
             
             container.RegisterType<IJsonSerializer, JsonSerializer>();
-            container.RegisterType<IGetReportData, GetReportData>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

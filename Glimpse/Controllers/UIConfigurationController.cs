@@ -12,25 +12,21 @@ namespace ReportingService.Controllers
     public class UIConfigurationController : ApiController
     {
         private readonly IJsonSerializer _jsonserializer;
-        private readonly IGetReportData _getreportdata;
-        public UIConfigurationController(IJsonSerializer jsonserializer, IGetReportData getreportdata)
+        public UIConfigurationController(IJsonSerializer jsonserializer)
         {
             _jsonserializer = jsonserializer;
-            _getreportdata = getreportdata;
         }
         public HttpResponseMessage Get(string ReportName)
         {
             try
             {
-                var configurationData = new ConfigurationAndData(); 
-                configurationData.Configuration= _jsonserializer
+                var configurationData = new ConfigurationDto();
+                configurationData = _jsonserializer
                     .Deserialize<ConfigDto>
                     (System.IO.File.ReadAllText("F:\\summer intern\\Repo\\Glimpse\\Glimpse\\ReportConfig.json"))
-                    .Configuration.Find(x => x.ReportName == ReportName);
+                    .Configuration.Find(x => x.ReportName == ReportName); 
 
-                configurationData.Data = _getreportdata.GetData(ReportName);
-
-                if (configurationData.Configuration == null || configurationData.Data == null) 
+                if (configurationData == null) 
                 {
                     return Request.CreateResponse(HttpStatusCode.ServiceUnavailable,
                         string.Format("unable to find resource that matches the report name {0}",ReportName));
