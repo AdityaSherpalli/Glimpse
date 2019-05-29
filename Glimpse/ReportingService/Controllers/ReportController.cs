@@ -18,47 +18,38 @@ namespace ReportingService.Controllers
         {
             return null;
         }
-        public HttpResponseMessage Get(string ReportName,string Parameter=null)
+        public IEnumerable<dynamic> Get(string SpName, string Parameter=null, string parameterValue=null)
         {
-            try
+            var cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
+            SqlDataReader reader;
+            using (var con = new SqlConnection(cs))
             {
-                var cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
-                SqlDataReader rdr;
-                var queryResult = new List<EmployeeDto>();
-                string SpName;
-                if(Parameter==null)
+                using (var cmd = new SqlCommand(SpName, con))
                 {
-                    SpName = "GetEmployeeDetails";
-                }
-                else
-                {
-                    SpName = "GetEmployeeDetailsByDept";
-                }
-                using (var con = new SqlConnection(cs))
-                {
-                    using (var cmd = new SqlCommand(SpName, con))
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    if(Parameter!=null)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        if (SpName == "GetEmployeeDetailsByDept")
-                            cmd.Parameters.AddWithValue("@dept",Parameter);
-                        con.Open();
-                        rdr = cmd.ExecuteReader();
-                        while (rdr.Read())
+                        cmd.Parameters.AddWithValue(Parameter, parameterValue);
+                    }
+                    con.Open();
+                    reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        var cols = reader.GetSchemaTable()
+                                     .Rows
+                                     .OfType<DataRow>()
+                                     .Select(r => r["ColumnName"]).ToList();
+                        do
                         {
-                            queryResult.Add(new EmployeeDto
-                            {
-                                ID = Convert.ToInt16(rdr["empno"]),
-                                name = rdr["ename"].ToString(),
-                                position = rdr["job"].ToString()
-                            });
-                        }
+                            dynamic t = new System.Dynamic.ExpandoObject();
+
+                            cols.ForEach(x => ((IDictionary<System.String, System.Object>)t)[x.ToString()] = reader[x.ToString()]);
+
+
+                            yield return t;
+                        } while (reader.Read());
                     }
                 }
-                return Request.CreateResponse(HttpStatusCode.OK,queryResult);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.ServiceUnavailable, "INTERNAL SERVER PROBLEM");
             }
         }
     }
