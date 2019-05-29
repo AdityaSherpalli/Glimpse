@@ -11,6 +11,7 @@
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
+[Pp]ackages/
 x64/
 x86/
 build/
