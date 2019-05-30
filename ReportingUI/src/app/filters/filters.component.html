@@ -1,0 +1,12 @@
+<div *ngIf="report">
+<input type="text" placeholder="Enter text">&nbsp;
+<select (change)="onSelect($event)">
+  <option value="" selected disabled hidden>Select</option>
+  <option value="ALL">ALL</option>
+  <option *ngFor="let data of dlldata" value={{data.value}}>
+    {{data.value}}
+  </option>
+</select>&nbsp;
+<input type="date">
+</div>
+<app-report [report]="report" [selectedValue]="selectedValue" [config]="config"></app-report>

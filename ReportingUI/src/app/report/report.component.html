@@ -1,0 +1,14 @@
+<div *ngIf="report">
+    <table border="1" width="100%">
+        <tr>
+          <th *ngFor="let key of keyss">
+            {{key}}
+          </th>
+        </tr>
+        <tr *ngFor="let item of arrayOne(comms.length); let i = index;">
+          <td *ngFor="let key of keyss">
+            {{comms[i][key]}}
+          </td>
+        </tr>
+      </table>
+    </div>

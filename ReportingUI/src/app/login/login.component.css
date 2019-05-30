@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Archivo+Narrow&display=swap');
+h1
+{
+    text-align: center;
+    color: aliceblue;
+    font-family:'Oswald', sans-serif;
+}
+body{
+    background-color: #001f3f;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    min-height: 90vh;
+    width: 100%;
+}
