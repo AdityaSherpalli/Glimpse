@@ -1,15 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-inverse">
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <li *ngFor="let report of lstRepo">
+    <a class="nav-link btn" (click)="onSelect(report)">{{report.DisplayName}}</a>
+  </li>
+</div>
+<nav class="navbar navbar-expand-lg navbar-inverse" style="background-color: rgb(34, 175, 34);border-radius: 25px">
   <div class="collapse navbar-collapse">
-    <ul class="navbar-nav">
-      <li class="nav-item" *ngFor="let report of lstRepo">
-        <a class="nav-link btn" (click)="onSelect(report)">{{report.DisplayName}}</a>
+    <span class="nav-item" style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776;DashBoard</span>
+    <ul class="navbar-nav navbar-right">
+      <li class="nav-item logout">
+        <a routerLink="/" class="nav-link btn"><span class="glyphicon glyphicon-log-in">LogOut</span></a>
       </li>
     </ul>
-    <ul class="navbar-nav navbar-right">
-        <li class="nav-item">
-          <a routerLink="/" class="nav-link btn"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
-        </li>
-      </ul>
   </div>
 </nav>
-<app-filters [report]="selectedRepo"></app-filters>
+<div id="main">
+  <app-filters [report]="selectedRepo"></app-filters>
+</div>

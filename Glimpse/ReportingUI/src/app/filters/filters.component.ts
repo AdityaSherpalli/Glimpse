@@ -26,24 +26,27 @@ export class FiltersComponent implements OnInit {
     this.selectedValue = event.target.value;
   }
   ngOnChanges(){
-    this._getconfigurationservice.getData(this.report.ReportName)
-    .subscribe
-    (
-      data=>
-      {
-        this.config=data;
-        this.storeProc=this.config.Parameters[0].StoredProcedureName;
-        if(this.config.Parameters[0].PrePopulate==true){
-        this._populateddldataservice.getData(this.storeProc)
-        .subscribe
-        (
-          data=>
-          {
-            this.dlldata=data;
-          }
-        )
-      }
-      }
-    )
+    if(this.report!=null)
+    {
+        this._getconfigurationservice.getData(this.report.ReportName)
+      .subscribe
+      (
+        data=>
+        {
+          this.config=data;
+          this.storeProc=this.config.Parameters[0].StoredProcedureName;
+          if(this.config.Parameters[0].PrePopulate==true){
+          this._populateddldataservice.getData(this.storeProc)
+          .subscribe
+          (
+            data=>
+            {
+              this.dlldata=data;
+            }
+          )
+        }
+        }
+      )
+    }
   }
 }
