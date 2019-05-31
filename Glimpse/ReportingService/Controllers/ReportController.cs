@@ -29,7 +29,11 @@ namespace ReportingService.Controllers
                     cmd.CommandType = CommandType.StoredProcedure;
                     if(Parameter!=null)
                     {
-                        cmd.Parameters.AddWithValue(Parameter, parameterValue);
+                        var count = 0;
+                        //foreach(var Key in Parameter)
+                        {
+                            cmd.Parameters.AddWithValue(Parameter, parameterValue);
+                        }
                     }
                     con.Open();
                     reader = cmd.ExecuteReader();

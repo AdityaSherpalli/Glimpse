@@ -11,5 +11,6 @@ namespace ReportingService.Dtos
         public string Type { get; set; }
         public bool PrePopulate { get; set; }
         public string StoredProcedureName { get; set; }
+        public string DefaultValue { get; set; }
     }
 }

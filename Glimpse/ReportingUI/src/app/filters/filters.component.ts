@@ -4,6 +4,7 @@ import { DLLdata } from '../DTO/DLLdata';
 import { PopulateDDLDataService } from '../services/PopulateDDLData.service';
 import { GetConfigurationService } from '../services/GetConfiguration.service';
 import { Configuration } from '../DTO/Configuration'
+import { config } from 'rxjs';
 
 @Component({
   selector: 'app-filters',
@@ -17,10 +18,10 @@ export class FiltersComponent implements OnInit {
   storeProc: string;
   dlldata: DLLdata[];
   selectedValue: string;
-  constructor(private _populateddldataservice: PopulateDDLDataService, private _getconfigurationservice: GetConfigurationService) {}
+  constructor(private _populateddldataservice: PopulateDDLDataService, 
+    private _getconfigurationservice: GetConfigurationService) {
+    }
   ngOnInit() {
-    
-	
   }
   onSelect(event:any): void {
     this.selectedValue = event.target.value;
@@ -34,6 +35,7 @@ export class FiltersComponent implements OnInit {
         data=>
         {
           this.config=data;
+          this.selectedValue=this.config.Parameters[0].DefaultValue;
           this.storeProc=this.config.Parameters[0].StoredProcedureName;
           if(this.config.Parameters[0].PrePopulate==true){
           this._populateddldataservice.getData(this.storeProc)

@@ -14,7 +14,8 @@
           "Name": "@dept",
           "Type": "nvarchar(10)",
           "PrePopulate": "true",
-          "StoredProcedureName": "GetDeptDetails" //should return two columns Text(would be shown in UI)and Value(Backing field)
+          "StoredProcedureName": "GetDeptDetails",
+          "DefaultValue": "ALL"
         }
       ]
     }

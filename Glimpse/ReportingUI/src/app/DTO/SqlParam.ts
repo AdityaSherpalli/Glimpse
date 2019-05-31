@@ -4,4 +4,5 @@ export class SqlParam
     Type:string;
     PrePopulate:boolean;
     StoredProcedureName:string;
+    DefaultValue:string;
 }
