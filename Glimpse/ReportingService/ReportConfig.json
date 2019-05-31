@@ -12,7 +12,7 @@
       "Parameters": [
         {
           "Name": "@dept",
-          "Type": "nvarchar(10)",
+          "Type": "int",
           "PrePopulate": "true",
           "StoredProcedureName": "GetDeptDetails",
           "DefaultValue": "ALL"
