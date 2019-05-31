@@ -1,8 +1,7 @@
 <div *ngIf="report">
 <input type="text" placeholder="Enter text">&nbsp;
 <select (change)="onSelect($event)">
-  <option value="" selected disabled hidden>Select</option>
-  <option value="ALL">ALL</option>
+  <option value="ALL" selected="selected">ALL</option>
   <option *ngFor="let data of dlldata" value={{data.value}}>
     {{data.value}}
   </option>
