@@ -12,9 +12,11 @@ export class ReportComponent implements OnInit {
   @Input() report:ReportName;
   @Input() selectedValue: string;
   @Input() config:Configuration;
-  constructor(private _getReport: GetReport) { }
+  constructor(private _getReport: GetReport) {
+  }
   comms:any;
   keyss:any;
+  rows:number;
   
   arrayOne(n: number): any[] {
     return Array(n);
@@ -32,6 +34,7 @@ export class ReportComponent implements OnInit {
       {
         this.comms=data;
         if(this.comms.length != 0) this.keyss = Object.keys(this.comms[0]);
+        this.rows=this.comms.length;
       }
     );
 

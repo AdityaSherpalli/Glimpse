@@ -1,11 +1,19 @@
 <div *ngIf="report">
-<input type="text" placeholder="Enter text">&nbsp;
+<div *ngIf="textBox">
+<input type="text" placeholder="Enter text">
+&nbsp;
+</div>
+<div *ngIf="dropDown">
 <select (change)="onSelect($event)">
   <option value="ALL" selected="selected">ALL</option>
   <option *ngFor="let data of dlldata" value={{data.value}}>
     {{data.value}}
   </option>
-</select>&nbsp;
+</select>
+&nbsp;
+</div>
+<div *ngIf="datePicker">
 <input type="date">
+</div>
 </div>
 <app-report [report]="report" [selectedValue]="selectedValue" [config]="config"></app-report>
