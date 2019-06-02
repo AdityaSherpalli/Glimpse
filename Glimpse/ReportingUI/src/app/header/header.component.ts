@@ -8,7 +8,6 @@ import {ReportName} from '../DTO/ReportName'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   constructor(private _getreportsnameservice:GetReportsNameService) { }
   lstRepo:ReportName[];
   selectedRepo:ReportName;
@@ -26,8 +25,8 @@ export class HeaderComponent implements OnInit {
     this.selectedRepo = report;
   }
   openNav() {
-    document.getElementById("mySidenav").style.width = "210px"
-    document.getElementById("main").style.marginLeft = "210px";
+    document.getElementById("mySidenav").style.width = "220px"
+    document.getElementById("main").style.marginLeft = "220px";
   }
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";

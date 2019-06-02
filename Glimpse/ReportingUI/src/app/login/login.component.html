@@ -1,12 +1,21 @@
-<body>
+<body style="background-color: #ebffe6">
     <div class="container mainCOnt">
             <div class="row">
                 <div class="col-md-6 Back">
-    
+                    <div class="w3-content w3-section" style="max-width:500px; padding-top: 25%">
+                        <img class="mySlides" src="assets/ncr1.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/ncr2.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/ncr3.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/ncr4.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/ncr5.jpg" style="width:100%">
+                        <img class="mySlides" src="assets/ncr6.jpg" style="width:100%">
+                    </div>
+                    <button class="w3-button w3-black w3-display-left" (click)="plusDivs(-1)">&#10094;</button>
+                    <button class="w3-button w3-black w3-display-right" (click)="plusDivs(1)">&#10095;</button>
                 </div>
                 <div class="col-md-6 alignCenter">
-                    <div>
-                      <h1 style="color: black">Login Form</h1>
+                    <div style="padding-left: 40%">
+                      <a href="https://www.ncr.com/"><img src="assets/ncrlogo.png" style="width:20%;height: 10%;"></a>
                     </div>
                     <form (submit)="Checkuser($event)">
                       <div class="well">
@@ -18,6 +27,9 @@
                               <label for="textbox2"><span>Password</span></label>
                               <input type="text" id="textbox2" type="password" placeholder="Password*"class="form-control"/>
                           </div>
+                          <div class="form-group">
+                              <input type="checkbox"/><span>Remember Me</span>
+                          </div>
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn-primary"/>
                             </div>
@@ -25,5 +37,5 @@
                     </form>
                 </div>
             </div>
-    </div>      
+    </div> 
 </body>
