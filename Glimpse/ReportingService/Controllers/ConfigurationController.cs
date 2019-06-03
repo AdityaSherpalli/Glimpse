@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Web.Http;
 using System.Net;
+using System.IO;
 using System.Net.Http;
 using ReportingService.Services;
 using ReportingService.Dtos;
+using System.Reflection;
 
 
 namespace ReportingService.Controllers
@@ -21,11 +23,14 @@ namespace ReportingService.Controllers
             {
                 var reportsData = _jsonserializer.Deserialize
                                             <ConfigDto>
-                                            (System.IO.File.ReadAllText("F:\\summer intern\\Repo\\Glimpse\\Glimpse\\ReportingService\\ReportConfig.json")).Reports;
+                                            (System.IO.File.ReadAllText("ReportConfig.json")).Reports;
                 if(reportsData==null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.Conflict,"Unable To Fetch File Data");
                 }
+                string x = Directory.GetCurrentDirectory();
+                string y= new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
+
                 return Request.CreateResponse(HttpStatusCode.OK, reportsData);
             }
             catch (Exception e)

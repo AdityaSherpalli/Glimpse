@@ -18,21 +18,23 @@ namespace ReportingService.Controllers
         {
             return null;
         }
-        public IEnumerable<dynamic> Get(string SpName, string Parameter=null, string parameterValue=null)
+        public IEnumerable<dynamic> Get(string spName, [FromUri]List<Dictionary<string,string>>parameterPair=null)
         {
             var cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
             SqlDataReader reader;
             using (var con = new SqlConnection(cs))
             {
-                using (var cmd = new SqlCommand(SpName, con))
+                using (var cmd = new SqlCommand(spName, con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    if(Parameter!=null)
+                    if(parameterPair!=null)
                     {
-                        var count = 0;
-                        //foreach(var Key in Parameter)
+                        foreach (Dictionary<string,string> parameter in parameterPair)
                         {
-                            cmd.Parameters.AddWithValue(Parameter, parameterValue);
+                            foreach (KeyValuePair<string,string> pair in parameter)
+                            {
+                                cmd.Parameters.AddWithValue(pair.Key, pair.Value);
+                            }
                         }
                     }
                     con.Open();

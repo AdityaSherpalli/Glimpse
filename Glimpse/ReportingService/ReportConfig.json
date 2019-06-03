@@ -3,6 +3,10 @@
     {
       "DisplayName": "Smith",
       "ReportName": "emp"
+    },
+    {
+      "DisplayName": "Tom",
+      "ReportName": "dept"
     }
   ],
   "Configuration": [
