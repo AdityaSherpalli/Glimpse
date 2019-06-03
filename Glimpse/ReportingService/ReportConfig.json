@@ -16,10 +16,24 @@
       "Parameters": [
         {
           "Name": "@dept",
+          "Type": "string",
+          "PrePopulate": "true",
+          "StoredProcedureName": "GetDeptDetails",
+          "DefaultValue": "ALL"
+        },
+        {
+          "Name": "@ename",
           "Type": "int",
           "PrePopulate": "true",
           "StoredProcedureName": "GetDeptDetails",
           "DefaultValue": "ALL"
+        },
+        {
+          "Name": "@hiredate",
+          "Type": "date",
+          "PrePopulate": "true",
+          "StoredProcedureName": "GetDeptDetails",
+          "DefaultValue": "-1"
         }
       ]
     }

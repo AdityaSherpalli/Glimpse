@@ -10,9 +10,11 @@ import { Configuration } from '../DTO/Configuration';
 })
 export class ReportComponent implements OnInit {
   @Input() report:ReportName;
-  @Input() selectedValue: string;
+  @Input() parameters: Map<string, string>;
   @Input() config:Configuration;
+  @Input() selectedValue:string;
   constructor(private _getReport: GetReport) {
+    this.parameters = new Map<string, string>();
   }
   comms:any;
   keyss:any;
@@ -23,11 +25,14 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit(){
-
+    console.log(this.parameters.size +' map');
+    console.log(this.parameters.get('@dept'));
   }
 
   ngOnChanges() {
-    this._getReport.getData(this.config.StoredProcedureName,this.config.Parameters[0].Name, this.selectedValue)
+    console.log(this.parameters.size +' map');
+    console.log(this.parameters.get('@dept'));
+    this._getReport.getData(this.config.StoredProcedureName, this.parameters)
     .subscribe
     (
       data=>
