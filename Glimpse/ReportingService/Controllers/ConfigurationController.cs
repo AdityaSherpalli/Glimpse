@@ -23,7 +23,7 @@ namespace ReportingService.Controllers
             {
                 var reportsData = _jsonserializer.Deserialize
                                             <ConfigDto>
-                                            (System.IO.File.ReadAllText("ReportConfig.json")).Reports;
+                                            (System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("/ReportConfig.json"))).Reports;
                 if(reportsData==null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.Conflict,"Unable To Fetch File Data");

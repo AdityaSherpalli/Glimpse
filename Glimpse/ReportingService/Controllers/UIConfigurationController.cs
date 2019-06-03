@@ -23,7 +23,7 @@ namespace ReportingService.Controllers
                 var configurationData = new ConfigurationDto();
                 configurationData = _jsonserializer
                     .Deserialize<ConfigDto>
-                    (System.IO.File.ReadAllText("F:\\summer intern\\Repo\\Glimpse\\Glimpse\\ReportingService\\ReportConfig.json"))
+                    (System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("/ReportConfig.json")))
                     .Configuration.Find(x => x.ReportName == ReportName); 
 
                 if (configurationData == null) 
