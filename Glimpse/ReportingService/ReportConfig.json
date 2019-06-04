@@ -16,24 +16,33 @@
       "Parameters": [
         {
           "Name": "@dept",
-          "Type": "string",
-          "PrePopulate": "true",
-          "StoredProcedureName": "GetDeptDetails",
-          "DefaultValue": "ALL"
-        },
-        {
-          "Name": "@ename",
+          "displayName": "Department",
           "Type": "int",
           "PrePopulate": "true",
           "StoredProcedureName": "GetDeptDetails",
           "DefaultValue": "ALL"
+        }
+      ]
+    },
+    {
+      "ReportName": "dept",
+      "StoredProcedureName": "GetEmployeeDetailsByDept",
+      "Parameters": [
+        {
+          "Name": "@dept",
+          "displayName": "Name",
+          "Type": "string",
+          "PrePopulate": "false",
+          "StoredProcedureName": " ",
+          "DefaultValue": "ALL"
         },
         {
-          "Name": "@hiredate",
+          "Name": "@dep",
+          "displayName": "HireDate",
           "Type": "date",
-          "PrePopulate": "true",
-          "StoredProcedureName": "GetDeptDetails",
-          "DefaultValue": "-1"
+          "PrePopulate": "false",
+          "StoredProcedureName": " ",
+          "DefaultValue": "Today"
         }
       ]
     }

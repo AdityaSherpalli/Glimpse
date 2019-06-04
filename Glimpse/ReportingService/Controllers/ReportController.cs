@@ -18,7 +18,7 @@ namespace ReportingService.Controllers
         {
             return null;
         }
-        public IEnumerable<dynamic> Get(string spName, [FromUri]List<Dictionary<string,string>>parameterPair=null)
+        public IEnumerable<dynamic> Get(string spName, [FromUri]KeyValuePair<string,string>parameterPair)
         {
             var cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
             SqlDataReader reader;
@@ -27,15 +27,12 @@ namespace ReportingService.Controllers
                 using (var cmd = new SqlCommand(spName, con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    if(parameterPair!=null)
+                    if(parameterPair.Key!=null)
                     {
-                        foreach (Dictionary<string,string> parameter in parameterPair)
-                        {
-                            foreach (KeyValuePair<string,string> pair in parameter)
+                            //foreach (KeyValuePair<string,string> pair in parameterPair)
                             {
-                                cmd.Parameters.AddWithValue(pair.Key, pair.Value);
+                                cmd.Parameters.AddWithValue(parameterPair.Key, parameterPair.Value);
                             }
-                        }
                     }
                     con.Open();
                     reader = cmd.ExecuteReader();

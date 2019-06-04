@@ -8,6 +8,7 @@ namespace ReportingService.Dtos
     public class SqlParamDto
     {
         public string Name { get; set; }
+        public string displayName { get; set; }
         public string Type { get; set; }
         public bool PrePopulate { get; set; }
         public string StoredProcedureName { get; set; }

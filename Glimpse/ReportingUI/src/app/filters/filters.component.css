@@ -1,0 +1,85 @@
+h1{
+    font-size: smaller;
+}
+.sidenav {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    z-index: 1;
+    top: 90;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+    border-radius: 25px;
+  }
+  .sidenav1 {
+    height: 100%;
+    width: 40px;
+    position: fixed;
+    z-index: 1;
+    top: 90;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 50px;
+    border-radius: 25px;
+  }
+  .form-control
+  {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #main
+  {
+    margin-left: 220px;
+  }
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.1s;
+  }
+  
+  .sidenav a:hover {
+    color:rgba(0, 0, 0, 0.205);
+  }
+  .sidenav1 a:hover {
+    color:rgba(0, 0, 0, 0.205);
+  }
+  .sidenav1 .closebtn {
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 0px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  .sidenav .closebtn {
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  span{
+      padding-left: 3px;
+      float: left;
+      color: black;
+  }
+.logout
+{
+    color: black;
+}
+
+.ex1 {
+  width: 220px;
+  height: 50%;
+  overflow: scroll;
+}

@@ -12,6 +12,10 @@ import { FiltersComponent } from './filters/filters.component';
 import { GetConfigurationService } from './services/GetConfiguration.service';
 import { PopulateDDLDataService } from './services/PopulateDDLData.service';
 import { GetReport } from './services/GetReport.service';
+import { DashBoardComponent } from './dash-board/dash-board.component';
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
+  MatSortModule, MatTableModule } from "@angular/material";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,12 +23,19 @@ import { GetReport } from './services/GetReport.service';
     LoginComponent,
     ReportComponent,
     HeaderComponent,
-    FiltersComponent
+    FiltersComponent,
+    DashBoardComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [GetDataService, GetReportsNameService, GetConfigurationService, PopulateDDLDataService, GetReport],
   bootstrap: [AppComponent]

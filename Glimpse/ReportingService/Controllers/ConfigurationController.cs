@@ -28,9 +28,6 @@ namespace ReportingService.Controllers
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.Conflict,"Unable To Fetch File Data");
                 }
-                string x = Directory.GetCurrentDirectory();
-                string y= new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
-
                 return Request.CreateResponse(HttpStatusCode.OK, reportsData);
             }
             catch (Exception e)

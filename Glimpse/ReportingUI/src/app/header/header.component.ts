@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GetReportsNameService} from '../services/GetReportsName.service';
 import {ReportName} from '../DTO/ReportName'
+import{Router} from '@angular/router'
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import {ReportName} from '../DTO/ReportName'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private _getreportsnameservice:GetReportsNameService) { }
+  constructor(private _getreportsnameservice:GetReportsNameService,private router:Router) { }
   lstRepo:ReportName[];
   selectedRepo:ReportName;
   ngOnInit() {
@@ -23,13 +24,6 @@ export class HeaderComponent implements OnInit {
   }
   onSelect(report: ReportName): void {
     this.selectedRepo = report;
-  }
-  openNav() {
-    document.getElementById("mySidenav").style.width = "220px"
-    document.getElementById("main").style.marginLeft = "220px";
-  }
-  closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
+    document.getElementById("navbardrop").style.color="white";
   }
 }

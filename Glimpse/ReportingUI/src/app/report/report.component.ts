@@ -1,7 +1,10 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import { ReportName} from '../DTO/ReportName'
 import { GetReport } from '../services/GetReport.service';
 import { Configuration } from '../DTO/Configuration';
+import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
+import { keyframes } from '@angular/animations';
+
 
 @Component({
   selector: 'app-report',
@@ -13,25 +16,24 @@ export class ReportComponent implements OnInit {
   @Input() parameters: Map<string, string>;
   @Input() config:Configuration;
   @Input() selectedValue:string;
+  @ViewChild(MatSort) sort:MatSort;
+  @ViewChild(MatPaginator) paginator:MatPaginator;
+  renderData:MatTableDataSource<any>;
   constructor(private _getReport: GetReport) {
     this.parameters = new Map<string, string>();
   }
   comms:any;
   keyss:any;
   rows:number;
-  
+  displayedColumns=this.keyss;
   arrayOne(n: number): any[] {
     return Array(n);
   }
 
   ngOnInit(){
-    console.log(this.parameters.size +' map');
-    console.log(this.parameters.get('@dept'));
   }
 
   ngOnChanges() {
-    console.log(this.parameters.size +' map');
-    console.log(this.parameters.get('@dept'));
     this._getReport.getData(this.config.StoredProcedureName, this.parameters)
     .subscribe
     (
@@ -40,6 +42,9 @@ export class ReportComponent implements OnInit {
         this.comms=data;
         if(this.comms.length != 0) this.keyss = Object.keys(this.comms[0]);
         this.rows=this.comms.length;
+        this.renderData=new MatTableDataSource(this.comms);
+        this.renderData.sort=this.sort;
+        this.renderData.paginator=this.paginator;
       }
     );
 

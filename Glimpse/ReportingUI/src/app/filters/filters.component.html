@@ -1,35 +1,37 @@
 <div *ngIf="report">
-<div *ngFor="let param of config.Parameters">
-    <div *ngIf="param.Type === 'string'">
-        <input id={{param.Name}} type="text" placeholder="Enter text" (keyup.enter)="onSelect($event)">
+    <div *ngIf="visible" class="sidenav1">
+        <a style="font-size: 36px;cursor: pointer;" class="closebtn" (click)="openNav()">&#9776;</a>
     </div>
-    <div *ngIf="param.Type === 'int'">
-            <select id={{param.Name}} (change)="onSelect($event)">
-              <option value="ALL" selected="selected">ALL</option>
-              <option *ngFor="let data of dlldata" value={{data.value}}>
-                {{data.value}}
-              </option>
-            </select>
-    </div>
-    <div *ngIf="param.Type === 'date'">
-            <input id={{param.Name}} type="date" (change)="onSelect($event)">
-    </div>
+    <div id="mySidenav" class="sidenav">
+        <div>
+             <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&#9776;</a>
+        </div>
+        <div style="text-align: center">
+          <b>Filters</b>
+        </div>
+        <div>
+            <div *ngFor="let param of config.Parameters" class="form-group">
+                <div *ngIf="param.Type === 'string'">
+                    <label>{{param.displayName}}</label>
+                    <input class="form-control" id={{param.Name}} type="text" placeholder="{{param.displayName}}" (keyup.enter)="onSelect($event)">
+                </div>
+                <div *ngIf="param.Type === 'int'" class="form-group">
+                    <label>{{param.displayName}}</label>
+                    <select  class="form-control" id={{param.Name}} (change)="onSelect($event)">
+                          <option value="ALL" selected="selected">ALL</option>
+                          <option *ngFor="let data of dlldata" value={{data.value}}>
+                            {{data.value}}
+                          </option>
+                        </select>
+                </div>
+                <div *ngIf="param.Type === 'date'" class="form-group">
+                    <label>{{param.displayName}}</label>
+                    <input  class="form-control" id={{param.Name}} type="date" (change)="onSelect($event)">
+                </div>
+            </div>
+        </div>
+      </div>
 </div>
-
-<!--
-  <div *ngIf="textBox">
-<input type="text" placeholder="Enter text">
-</div>
-<div *ngIf="dropDown">
-<select id="x" (change)="onSelect($event)">
-  <option value="ALL" selected="selected">ALL</option>
-  <option *ngFor="let data of dlldata" value={{data.value}}>
-    {{data.value}}
-  </option>
-</select>
-</div>
-<div *ngIf="datePicker">
-<input type="date">
-</div>-->
-</div>
-<app-report [report]="report" [config]="config" [parameters]="parameters" [selectedValue]="selectedValue"></app-report>
+<div id="main">
+    <app-report [report]="report" [config]="config" [parameters]="parameters" [selectedValue]="selectedValue"></app-report>
+ </div>

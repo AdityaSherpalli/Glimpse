@@ -18,6 +18,7 @@ export class FiltersComponent implements OnInit {
   config: Configuration;
   dlldata: DLLdata[];
   selectedValue:string;
+  visible:boolean;
   parameters: Map<string, string>;
   constructor(private _populateddldataservice: PopulateDDLDataService, 
     private _getconfigurationservice: GetConfigurationService) {
@@ -25,9 +26,19 @@ export class FiltersComponent implements OnInit {
     }
   ngOnInit() {
   }
+  openNav() {
+      document.getElementById("mySidenav").style.width = "220px"
+      document.getElementById("main").style.marginLeft = "220px";
+      this.visible=false;
+  }
+  closeNav()
+  {
+    document.getElementById("mySidenav").style.width = "0px"
+    document.getElementById("main").style.marginLeft = "40px";
+    this.visible=true;
+  }
   onSelect(event:any): void {
     this.parameters.set(event.target.id, event.target.value)
-    console.log(this.parameters.get(event.target.id));
     this.selectedValue=this.parameters.get(event.target.id);
   }
   ngOnChanges(){
@@ -54,11 +65,9 @@ export class FiltersComponent implements OnInit {
                     this.dlldata=data;
                   }
                 )
-                console.log(this.parameters.get(this.config.Parameters[i].Name));
             }
           }
             if(this.config.Parameters[i].Type=="date"){
-              console.log('in date');
               this.parameters.set(this.config.Parameters[i].Name, this.config.Parameters[i].DefaultValue);
             }
           }
