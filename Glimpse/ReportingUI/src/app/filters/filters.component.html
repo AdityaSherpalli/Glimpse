@@ -1,3 +1,9 @@
+<div>
+    <select class="mdb-select md-form" id="MainDdl" style="width:220px">
+        <option value="" disabled selected>Choose your option</option>
+        <option *ngFor="let report of lstRepo" (click)="onSelectDdl(report)" value="report.DisplayName">{{report.DisplayName}}</option>
+    </select>
+</div>
 <div *ngIf="report">
     <div *ngIf="visible" class="sidenav1">
         <a style="font-size: 36px;cursor: pointer;" class="closebtn" (click)="openNav()">&#9776;</a>
@@ -13,7 +19,8 @@
             <div *ngFor="let param of config.Parameters" class="form-group">
                 <div *ngIf="param.Type === 'string'">
                     <label>{{param.displayName}}</label>
-                    <input class="form-control" id={{param.Name}} type="text" placeholder="{{param.displayName}}" (keyup.enter)="onSelect($event)">
+                    <input class="form-control" id={{param.Name}} 
+                    type="text" placeholder="{{param.displayName}}" (keyup.enter)="onSelect($event)">
                 </div>
                 <div *ngIf="param.Type === 'int'" class="form-group">
                     <label>{{param.displayName}}</label>
@@ -26,9 +33,13 @@
                 </div>
                 <div *ngIf="param.Type === 'date'" class="form-group">
                     <label>{{param.displayName}}</label>
-                    <input  class="form-control" id={{param.Name}} type="date" (change)="onSelect($event)">
+                    <input  class="form-control" id={{param.Name}} type="date" 
+                    (change)="onSelect($event)">
                 </div>
             </div>
+        </div>
+        <div>
+            <button  class="btn btn-primary" (click)="Reset()">Reset</button>
         </div>
       </div>
 </div>

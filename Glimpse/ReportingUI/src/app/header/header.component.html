@@ -2,16 +2,12 @@
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a routerLink='/dashboard'
+            <a routerLink='/dashboard' (click)="changecolor()" id="dashboard"
             class="nav-link btn btn-success" style="font-size: 20px;cursor: pointer;color: black"><span class="glyphicon glyphicon-home"></span> DashBoard</a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle btn btn-success" style="font-size: 20px;cursor:pointer"  id="navbardrop" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-folder-open"></span> Reports
-            </a>
-          <div class="dropdown-menu" style="background-color: rgb(79, 185, 74);">
-            <a class="dropdown-item" (click)="onSelect(report)" style="cursor:pointer" *ngFor="let report of lstRepo" >{{report.DisplayName}}</a>
-           </div>
+        <li class="nav-item">
+          <a routerLink='/filters' id="filters" (click)="changecolor()"
+          class="nav-link btn btn-success" style="font-size: 20px;cursor: pointer;color: black"><span class="glyphicon glyphicon-home"></span> Report</a>
         </li>
     </ul> 
     <ul class="navbar-nav navbar-right">
@@ -21,4 +17,3 @@
     </ul>
   </div>
 </nav>
-<app-filters [report]="selectedRepo"></app-filters>

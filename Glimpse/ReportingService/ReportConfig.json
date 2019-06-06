@@ -26,10 +26,10 @@
     },
     {
       "ReportName": "dept",
-      "StoredProcedureName": "GetEmployeeDetailsByDept",
+      "StoredProcedureName": "GetEmployeeNames",
       "Parameters": [
         {
-          "Name": "@dept",
+          "Name": "@name",
           "displayName": "Name",
           "Type": "string",
           "PrePopulate": "false",
@@ -37,12 +37,12 @@
           "DefaultValue": "ALL"
         },
         {
-          "Name": "@dep",
+          "Name": "@date",
           "displayName": "HireDate",
           "Type": "date",
           "PrePopulate": "false",
           "StoredProcedureName": " ",
-          "DefaultValue": "Today"
+          "DefaultValue": "0"
         }
       ]
     }

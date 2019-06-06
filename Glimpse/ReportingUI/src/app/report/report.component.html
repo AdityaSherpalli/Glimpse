@@ -9,7 +9,7 @@
       <div>
           <h5>Filters Applied</h5>
           <ul *ngFor="let param of config.Parameters">
-              <li>{{param.displayName}}:{{parameters.get(param.Name)}}</li>
+              <li>{{param.displayName}}:{{parameters[param.Name]}}</li>
           </ul>
           <hr style="border:1px solid"/>
       </div>

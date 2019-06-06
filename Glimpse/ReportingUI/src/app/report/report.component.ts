@@ -13,7 +13,7 @@ import { keyframes } from '@angular/animations';
 })
 export class ReportComponent implements OnInit {
   @Input() report:ReportName;
-  @Input() parameters: Map<string, string>;
+  @Input() parameters:{};
   @Input() config:Configuration;
   @Input() selectedValue:string;
   @ViewChild(MatSort) sort:MatSort;

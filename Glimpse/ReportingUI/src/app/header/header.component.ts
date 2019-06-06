@@ -1,29 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import {GetReportsNameService} from '../services/GetReportsName.service';
-import {ReportName} from '../DTO/ReportName'
-import{Router} from '@angular/router'
+import { Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-  constructor(private _getreportsnameservice:GetReportsNameService,private router:Router) { }
-  lstRepo:ReportName[];
-  selectedRepo:ReportName;
-  ngOnInit() {
-    this._getreportsnameservice.getData()
-    .subscribe
-    (
-      data=>
-      {
-        this.lstRepo=data;
-      }
-    )
+export class HeaderComponent{
+  constructor(private router:Router)
+  {
+    
   }
-  onSelect(report: ReportName): void {
-    this.selectedRepo = report;
-    document.getElementById("navbardrop").style.color="white";
+  ngOnInit()
+  {
+    if(this.router.url=='/filters')
+    {
+      document.getElementById("filters").style.color="black";
+      document.getElementById("dashboard").style.color="white";
+    }
+    if(this.router.url=='/dashboard')
+    {
+      document.getElementById("filters").style.color="white";
+      document.getElementById("dashboard").style.color="black";
+    }
+  }
+  changecolor()
+  {
+    if(this.router.url=='/filters')
+    {
+      document.getElementById("filters").style.color="white";
+      document.getElementById("dashboard").style.color="black";
+    }
+    if(this.router.url=='/dashboard')
+    {
+      document.getElementById("filters").style.color="black";
+      document.getElementById("dashboard").style.color="white";
+    }
   }
 }

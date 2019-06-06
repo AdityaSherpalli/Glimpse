@@ -8,6 +8,7 @@ using ReportingService.Dtos;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using Newtonsoft;
 
 
 namespace ReportingService.Controllers
@@ -18,39 +19,43 @@ namespace ReportingService.Controllers
         {
             return null;
         }
-        public IEnumerable<dynamic> Get(string spName, [FromUri]KeyValuePair<string,string>parameterPair)
+        public IEnumerable<dynamic> Get(string spName, [FromUri]dynamic parameter)
         {
+            var parameterPair = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(parameter);
             var cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
             SqlDataReader reader;
-            using (var con = new SqlConnection(cs))
+            //try
             {
-                using (var cmd = new SqlCommand(spName, con))
+                using (var con = new SqlConnection(cs))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    if(parameterPair.Key!=null)
+                    using (var cmd = new SqlCommand(spName, con))
                     {
-                            //foreach (KeyValuePair<string,string> pair in parameterPair)
-                            {
-                                cmd.Parameters.AddWithValue(parameterPair.Key, parameterPair.Value);
-                            }
-                    }
-                    con.Open();
-                    reader = cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        var cols = reader.GetSchemaTable()
-                                     .Rows
-                                     .OfType<DataRow>()
-                                     .Select(r => r["ColumnName"]).ToList();
-                        do
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (parameter != null)
                         {
-                            dynamic t = new System.Dynamic.ExpandoObject();
+                            foreach (KeyValuePair<string, string> pair in parameterPair)
+                            {
+                                cmd.Parameters.AddWithValue(pair.Key, pair.Value);
+                            }
+                        }
+                        con.Open();
+                        reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            var cols = reader.GetSchemaTable()
+                                         .Rows
+                                         .OfType<DataRow>()
+                                         .Select(r => r["ColumnName"]).ToList();
+                            do
+                            {
+                                dynamic t = new System.Dynamic.ExpandoObject();
 
-                            cols.ForEach(x => ((IDictionary<System.String, System.Object>)t)[x.ToString()] = reader[x.ToString()]);
+                                cols.ForEach(x => ((IDictionary<System.String, System.Object>)t)[x.ToString()] = reader[x.ToString()]);
 
 
-                            yield return t;
-                        } while (reader.Read());
+                                yield return t;
+                            } while (reader.Read());
+                        }
                     }
                 }
             }
