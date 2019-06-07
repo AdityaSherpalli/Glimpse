@@ -13,28 +13,25 @@ export class HeaderComponent{
   }
   ngOnInit()
   {
-    if(this.router.url=='/filters')
-    {
-      document.getElementById("filters").style.color="black";
-      document.getElementById("dashboard").style.color="white";
-    }
-    if(this.router.url=='/dashboard')
-    {
-      document.getElementById("filters").style.color="white";
-      document.getElementById("dashboard").style.color="black";
-    }
+    document.getElementById("filters").style.color="black";
+    document.getElementById("dashboard").style.color="black";
+    document.getElementById("filters").style.backgroundColor="rgb(6,96,44)";
   }
-  changecolor()
+  changecolorRepo()
   {
-    if(this.router.url=='/filters')
-    {
-      document.getElementById("filters").style.color="white";
-      document.getElementById("dashboard").style.color="black";
-    }
-    if(this.router.url=='/dashboard')
-    {
       document.getElementById("filters").style.color="black";
       document.getElementById("dashboard").style.color="white";
-    }
+      document.getElementById("dashboard").style.backgroundColor=" rgb(79, 185, 74)";
+      document.getElementById("filters").style.backgroundColor="rgb(6,96,44)";
+      this.router.navigate(['filters']);
+  }
+  changecolorDash()
+  {
+      document.getElementById("filters").style.color="white";
+      document.getElementById("dashboard").style.color="black";
+      document.getElementById("filters").style.backgroundColor=" rgb(79, 185, 74)";
+      document.getElementById("dashboard").style.backgroundColor="rgb(6,96,44)";
+      this.router.navigate(['dashboard']);
   }
 }
+

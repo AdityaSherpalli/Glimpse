@@ -13,3 +13,13 @@ table {
     justify-content: center;
     font-style: italic;
   }
+  .navbar-fixed-top
+  {
+    margin-top: 100px;
+    margin-left: 240px;
+  }
+  .ex1 {
+    width:100%-220px;
+    height: 320px;
+    overflow: scroll;
+  }

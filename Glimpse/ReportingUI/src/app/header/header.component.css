@@ -8,7 +8,9 @@ h1{
 .cust
 {
   background-color: rgb(79, 185, 74);
-  position: sticky;
-  top: 0px; 
-  z-index: 100;
+}
+.dropdown
+{
+  padding-top: 8px;
+  padding-right: 10px;
 }

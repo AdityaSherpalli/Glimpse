@@ -1,48 +1,46 @@
 <div>
-    <select class="mdb-select md-form" id="MainDdl" style="width:220px">
-        <option value="" disabled selected>Choose your option</option>
-        <option *ngFor="let report of lstRepo" (click)="onSelectDdl(report)" value="report.DisplayName">{{report.DisplayName}}</option>
-    </select>
-</div>
-<div *ngIf="report">
-    <div *ngIf="visible" class="sidenav1">
-        <a style="font-size: 36px;cursor: pointer;" class="closebtn" (click)="openNav()">&#9776;</a>
-    </div>
-    <div id="mySidenav" class="sidenav">
-        <div>
-             <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&#9776;</a>
-        </div>
-        <div style="text-align: center">
-          <b>Filters</b>
-        </div>
-        <div>
-            <div *ngFor="let param of config.Parameters" class="form-group">
-                <div *ngIf="param.Type === 'string'">
-                    <label>{{param.displayName}}</label>
-                    <input class="form-control" id={{param.Name}} 
-                    type="text" placeholder="{{param.displayName}}" (keyup.enter)="onSelect($event)">
-                </div>
-                <div *ngIf="param.Type === 'int'" class="form-group">
-                    <label>{{param.displayName}}</label>
-                    <select  class="form-control" id={{param.Name}} (change)="onSelect($event)">
-                          <option value="ALL" selected="selected">ALL</option>
-                          <option *ngFor="let data of dlldata" value={{data.value}}>
-                            {{data.value}}
-                          </option>
-                        </select>
-                </div>
-                <div *ngIf="param.Type === 'date'" class="form-group">
-                    <label>{{param.displayName}}</label>
-                    <input  class="form-control" id={{param.Name}} type="date" 
-                    (change)="onSelect($event)">
-                </div>
+    <div class="navbar-fixed-top">
+        <div id="mySidenav" class="sidenav">
+            <div style="padding-top: 30px;">
+                    <select class="mdb-select md-form" id="MainDdl" style="width:220px">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option *ngFor="let report of lstRepo" (click)="onSelectDdl(report)" value="report.DisplayName">{{report.DisplayName}}</option>
+                    </select>
+            </div>
+            <div *ngIf="report">
+                        <div style="text-align: center">
+                            <b>Filters</b>
+                        </div>
+                        <div>
+                            <div *ngFor="let param of config.Parameters" class="form-group">
+                                <div *ngIf="param.Type === 'string'">
+                                     <label>{{param.displayName}}</label>
+                                        <input class="form-control" id={{param.Name}} value={{param.DefaultValue}}
+                                        type="text" placeholder="{{param.displayName}}" (keyup.enter)="onSelect($event)">
+                                </div>
+                                <div *ngIf="param.Type === 'int'" class="form-group">
+                                     <label>{{param.displayName}}</label>
+                                     <select  class="form-control" id={{param.Name}} (change)="onSelect($event)">
+                                         <option value="{{param.DefaultValue}}" selected="selected">{{param.DefaultValue}}</option>
+                                        <option *ngFor="let data of dlldata" value={{data.value}}>
+                                                {{data.value}}
+                                         </option>
+                                     </select>
+                                </div>
+                                <div *ngIf="param.Type === 'date'" class="form-group date">
+                                    <label>{{param.displayName}}</label>
+                                    <input  class="form-control" id={{param.Name}} type="date" 
+                                    (change)="onSelect($event)" value="{{date}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button  class="btn btn-primary" (click)="Reset()">Reset</button>
+                        </div>
             </div>
         </div>
-        <div>
-            <button  class="btn btn-primary" (click)="Reset()">Reset</button>
-        </div>
-      </div>
+    </div>
 </div>
-<div id="main">
+<div id="main" style="margin-top: 100px">
     <app-report [report]="report" [config]="config" [parameters]="parameters" [selectedValue]="selectedValue"></app-report>
  </div>

@@ -18,7 +18,10 @@ export class FiltersComponent implements OnInit {
   dlldata: DLLdata[];
   selectedValue:string;
   visible:boolean;
+  month:string;
+  dat:string;
   parameters:{};
+  date:string;
   lstRepo:ReportName[];
   constructor(private _populateddldataservice: PopulateDDLDataService, 
     private _getconfigurationservice: GetConfigurationService,
@@ -34,6 +37,21 @@ export class FiltersComponent implements OnInit {
         this.lstRepo=data;
       }
     )
+    let today=new Date();
+    let x=today.getMonth()+1;
+    let y=today.getDate();
+    this.month=x.toString();
+    this.dat=y.toString();
+    if(x<10)
+    {
+      this.month='0'+x.toString();
+    }
+    if(y<10)
+    {
+      this.dat='0'+y.toString();
+    }
+    this.date= today.getFullYear()+'-'+this.month+'-'+this.dat;
+    console.log(this.date);
   }
   openNav() {
       document.getElementById("mySidenav").style.width = "220px"
@@ -73,6 +91,7 @@ export class FiltersComponent implements OnInit {
       (
         data=>
         {
+          let today = new Date();
           this.config=data;
           for(var i = 0;i < this.config.Parameters.length; i++){
             if(this.config.Parameters[i].Type=="string"){
@@ -92,7 +111,7 @@ export class FiltersComponent implements OnInit {
             }
           }
             if(this.config.Parameters[i].Type=="date"){
-              this.parameters[this.config.Parameters[i].Name]=this.config.Parameters[i].DefaultValue;
+              this.parameters[this.config.Parameters[i].Name]=this.date;
             }
           }
         }

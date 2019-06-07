@@ -1,6 +1,10 @@
 h1{
     font-size: smaller;
 }
+.navbar-fixed-top
+{
+  margin-top:70px;
+}
 .sidenav {
     height: 100%;
     width: 220px;
@@ -54,7 +58,7 @@ h1{
   }
   .sidenav1 .closebtn {
     color: black;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0px;
     font-size: 36px;
@@ -63,6 +67,7 @@ h1{
   .sidenav .closebtn {
     color: black;
     position: absolute;
+    padding-top: 10px;
     top: 0;
     right: 25px;
     font-size: 36px;
@@ -77,9 +82,4 @@ h1{
 .logout
 {
     color: black;
-}
-.ex1 {
-  width: 220px;
-  height: 50%;
-  overflow: scroll;
 }

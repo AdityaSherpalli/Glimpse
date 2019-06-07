@@ -1,37 +1,49 @@
 <style>
     @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 </style>
-<div *ngIf="report"  class="well">
-     <div>
-        <b><h4 style="text-align:center;font-size: x-large">Report {{report.DisplayName}}</h4></b>
-        <hr/>
-      </div>
+<div *ngIf="report" class="well">
+     <div id="printarea">
+        <div class="navbar-fixed-top">
+            <a class="navbar-nav navbar-right" (click)="print()" style="padding-right: 70px;padding-top: 10px;cursor: pointer;">
+              <span class="glyphicon glyphicon-print" style="font-size: 20px"></span></a>
+            <div>
+              <b><h4 style="text-align:center;font-size: x-large">Report {{report.DisplayName}}</h4></b>
+              <hr/>
+            </div>
+            <div>
+                <h5>Filters Applied</h5>
+                <ul *ngFor="let param of config.Parameters">
+                    <li>{{param.displayName}}:{{parameters[param.Name]}}</li>
+                </ul>
+                <hr style="border:1px solid"/>
+            </div>
+       </div>
+        <div style="margin-top: 170px;">
+            <div class="ex1">
+                <table mat-table matSort [dataSource]="renderData" class="mat-elevation-z8">
+                    <ng-container *ngFor="let col of keyss" matColumnDef="{{col}}">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element[col]}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="loading">
+                      <mat-footer-cell *matFooterCellDef colspan="6">
+                        Loading Data....
+                      </mat-footer-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="noData">
+                        <mat-footer-cell *matFooterCellDef colspan="6">
+                          No Data To Display
+                        </mat-footer-cell>
+                      </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="keyss"></tr>
+                    <tr mat-row *matRowDef="let row; columns: keyss;"></tr>
+                    <mat-footer-row *matFooterRowDef="['loading']"  [ngClass]="{'hide':renderData!=null}"></mat-footer-row>
+                    <mat-footer-row *matFooterRowDef="['noData']"  [ngClass]="{'hide':!renderData!=null}"></mat-footer-row>
+                  </table>
+            </div>
+        </div>
+     </div>
       <div>
-          <h5>Filters Applied</h5>
-          <ul *ngFor="let param of config.Parameters">
-              <li>{{param.displayName}}:{{parameters[param.Name]}}</li>
-          </ul>
-          <hr style="border:1px solid"/>
+          <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="5"></mat-paginator>
       </div>
-      <table mat-table matSort [dataSource]="renderData" class="mat-elevation-z8">
-        <ng-container *ngFor="let col of keyss" matColumnDef="{{col}}">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col}} </th>
-          <td mat-cell *matCellDef="let element"> {{element[col]}} </td>
-        </ng-container>
-        <ng-container matColumnDef="loading">
-          <mat-footer-cell *matFooterCellDef colspan="6">
-            Loading Data....
-          </mat-footer-cell>
-        </ng-container>
-        <ng-container matColumnDef="noData">
-            <mat-footer-cell *matFooterCellDef colspan="6">
-              No Data To Display
-            </mat-footer-cell>
-          </ng-container>
-        <tr mat-header-row *matHeaderRowDef="keyss"></tr>
-        <tr mat-row *matRowDef="let row; columns: keyss;"></tr>
-        <mat-footer-row *matFooterRowDef="['loading']"  [ngClass]="{'hide':renderData!=null}"></mat-footer-row>
-        <mat-footer-row *matFooterRowDef="['noData']"  [ngClass]="{'hide':!renderData!=null}"></mat-footer-row>
-      </table>
-      <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="5"></mat-paginator>
 </div>
