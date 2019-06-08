@@ -17,7 +17,7 @@ export class FiltersComponent implements OnInit {
   config: Configuration;
   dlldata: DLLdata[];
   selectedValue:string;
-  visible:boolean;
+  visible:boolean=true;
   month:string;
   dat:string;
   parameters:{};
@@ -29,6 +29,7 @@ export class FiltersComponent implements OnInit {
       this.parameters = new Map<string, string>();
     }
   ngOnInit() {
+    this.visible=true;
     this._getreportsnameservice.getData()
     .subscribe
     (
@@ -53,25 +54,12 @@ export class FiltersComponent implements OnInit {
     this.date= today.getFullYear()+'-'+this.month+'-'+this.dat;
     console.log(this.date);
   }
-  openNav() {
-      document.getElementById("mySidenav").style.width = "220px"
-      document.getElementById("MainDdl").style.width = "220px"
-      document.getElementById("main").style.marginLeft = "220px";
-      this.visible=false;
-  }
   Reset()
   {
     this.parameters={};
     for(var i = 0;i < this.config.Parameters.length; i++){
       this.parameters[this.config.Parameters[i].Name]= this.config.Parameters[i].DefaultValue;
     }
-  }
-  closeNav()
-  {
-    document.getElementById("mySidenav").style.width = "0px"
-    document.getElementById("MainDdl").style.width = "0px"
-    document.getElementById("main").style.marginLeft = "40px";
-    this.visible=true;
   }
   onSelect(event:any): void {
     this.parameters[event.target.id]= event.target.value;
@@ -81,6 +69,20 @@ export class FiltersComponent implements OnInit {
     this.report = report;
     this.parameters={};
     this.renderData();
+  }
+  openNav()
+  {
+    document.getElementById("mySidenav").style.width="250px";
+    document.getElementById("mySidenav1").style.marginLeft="250px";
+    document.getElementById("main").style.marginLeft="270px"
+    this.visible=true;
+  }
+  closeNav()
+  {
+    document.getElementById("mySidenav").style.width="0px";
+    document.getElementById("mySidenav1").style.marginLeft="0px";
+    document.getElementById("main").style.marginLeft="20px"
+    this.visible=false;
   }
   renderData(){
     console.log(1);

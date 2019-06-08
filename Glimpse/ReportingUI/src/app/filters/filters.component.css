@@ -1,85 +1,64 @@
-h1{
-    font-size: smaller;
-}
 .navbar-fixed-top
 {
   margin-top:70px;
 }
 .sidenav {
     height: 100%;
-    width: 220px;
+    width: 250px;
     position: fixed;
     z-index: 1;
     top: 90;
     left: 0;
-    background-color: white;
+    background-color:white;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 10px;
-    border-radius: 25px;
   }
   .sidenav1 {
     height: 100%;
-    width: 40px;
+    width: 20px;
     position: fixed;
     z-index: 1;
     top: 90;
     left: 0;
-    background-color: white;
+    margin-left: 250px;
+    background-color:white;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 50px;
-    border-radius: 25px;
+    padding-top: 0px;
   }
+
+  /***********************************************************/
   .form-control
   {
-    padding-left: 30px;
-    padding-right: 10px;
-    width:90%;
+    margin-left: 15px;
+    width:80%;
+  }
+  label{
+    padding-bottom: 5px;
+    padding-top: 5px;
   }
   #main
   {
-    margin-left: 220px;
+    margin-left: 270px;
   }
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: black;
-    display: block;
-    transition: 0.1s;
+  /*************************************************************/
+  .inner-addon { 
+    position: relative; 
   }
-  
-  .sidenav a:hover {
-    color:rgba(0, 0, 0, 0.205);
-  }
-  .sidenav1 a:hover {
-    color:rgba(0, 0, 0, 0.205);
-  }
-  .sidenav1 .closebtn {
-    color: black;
-    position: fixed;
-    top: 0;
-    right: 0px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  .sidenav .closebtn {
-    color: black;
-    position: absolute;
-    padding-top: 10px;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  
-  span{
-      padding-left: 3px;
-      float: left;
-      color: black;
-  }
-.logout
-{
-    color: black;
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.right-addon .glyphicon { right: 0;margin-right: 20%}
+
+.right-addon input { padding-right: 0px; }
+.right-addon select { padding-right: 0px; }
+select{
+  margin-right:10px;
+  margin-left:10px;
+  width:230px;
 }

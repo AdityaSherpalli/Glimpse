@@ -1,16 +1,29 @@
-h1{
-  font-size: smaller;
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+section {
+  height:60px;
+  border-radius: 10px;
 }
-.logout
-{
-  color: black;
+
+#tabs{
+background: rgb(79, 185, 74);
+  color: #eee;
 }
-.cust
-{
-  background-color: rgb(79, 185, 74);
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: #f3f3f3;
+  background-color: transparent;
+  border-color: transparent transparent #f3f3f3;
+  border-bottom: 5px solid !important;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
 }
-.dropdown
-{
-  padding-top: 8px;
-  padding-right: 10px;
+#tabs .nav-tabs .nav-link {
+  border: 1px solid transparent;
+  font-family: 'Ubuntu', sans-serif;
+  color: #eee;
+  font-size: 20px;
 }
+.Logout{
+}
+/***********************************************************/
