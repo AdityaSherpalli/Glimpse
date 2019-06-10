@@ -1,11 +1,12 @@
 <div>
     <div>
         <div class="navbar-fixed-top">
-            <div id="mySidenav" class="sidenav">
+            <div id="mySidenav" class="sidenav ex1">
                 <div>
-                    <select class="mdb-select md-form btn btn-success" id="MainDdl">
+                    <select style="margin-right: 20px" 
+                    class="mdb-select md-form btn btn-success" (change)="onSelectDdl($event)" id="MainDdl">
                         <option value="" disabled selected>Choose your option</option>
-                        <option *ngFor="let report of lstRepo" (click)="onSelectDdl(report)" value="report.DisplayName">
+                        <option *ngFor="let report of lstRepo" value="{{report.ReportName}}">
                             {{report.DisplayName}}</option>
                     </select>
                 </div>
@@ -17,7 +18,7 @@
                     <div>
                         <div *ngFor="let param of config.Parameters" class="form-group">
                             <div *ngIf="param.Type === 'string'">
-                                <label>{{param.displayName}}</label>
+                                <label style="margin-left: 15px">{{param.displayName}}</label>
                                 <div class="inner-addon right-addon">
                                     <i class="glyphicon glyphicon-search"></i>
                                     <input class="form-control" id={{param.Name}} value={{param.DefaultValue}}
@@ -26,7 +27,7 @@
                                 </div>
                             </div>
                             <div *ngIf="param.Type === 'int'" class="form-group">
-                                <label>{{param.displayName}}</label>
+                                <label style="margin-left: 15px">{{param.displayName}}</label>
                                 <div class="inner-addon right-addon">
                                     <select class="form-control" id={{param.Name}} (change)="onSelect($event)">
                                         <option value="{{param.DefaultValue}}" selected="selected">
@@ -39,11 +40,26 @@
                                 </div>
                             </div>
                             <div *ngIf="param.Type === 'date'" class="form-group date">
-                                <label>{{param.displayName}}</label>
+                                <label style="margin-left: 15px">{{param.displayName}}</label>
                                 <div class="inner-addon right-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                     <input class="form-control" id={{param.Name}} type="date"
                                         (change)="onSelect($event)" value="{{date}}">
+                                </div>
+                            </div>
+                            <div *ngIf="param.Type === 'dateRange'" class="form-group">
+                                <label style="margin-left: 15px">{{param.displayName}}</label>
+                                <div class="row">
+                                    <div class="inner-addon right-addon block">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                        <input class="form-control" id={{param.Name}} type="date"
+                                            (change)="onSelect($event)" value="{{date}}">
+                                    </div>
+                                    <div class="inner-addon right-addon block">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                        <input class="form-control" id={{param.Name}} type="date"
+                                            (change)="onSelect($event)" value="{{date}}">
+                                    </div>
                                 </div>
                             </div>
                         </div>

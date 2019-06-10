@@ -12,7 +12,7 @@ import { Configuration } from '../DTO/Configuration';
   styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-	report:ReportName;
+  report:ReportName;
   listData:DLLdata;
   config: Configuration;
   dlldata: DLLdata[];
@@ -27,6 +27,7 @@ export class FiltersComponent implements OnInit {
     private _getconfigurationservice: GetConfigurationService,
     private _getreportsnameservice:GetReportsNameService) {
       this.parameters = new Map<string, string>();
+      this.report=new ReportName();
     }
   ngOnInit() {
     this.visible=true;
@@ -61,12 +62,17 @@ export class FiltersComponent implements OnInit {
       this.parameters[this.config.Parameters[i].Name]= this.config.Parameters[i].DefaultValue;
     }
   }
+  GetReportName(Name:string):string
+  {
+    return this.lstRepo.find(x=>x.ReportName==Name).DisplayName;
+  }
   onSelect(event:any): void {
     this.parameters[event.target.id]= event.target.value;
     this.selectedValue=this.parameters[event.target.id];
   }
-  onSelectDdl(report: ReportName): void {
-    this.report = report;
+  onSelectDdl(event:any): void {
+    this.report.ReportName=event.target.value;
+    this.report.DisplayName=this.GetReportName(this.report.ReportName);
     this.parameters={};
     this.renderData();
   }
@@ -85,7 +91,6 @@ export class FiltersComponent implements OnInit {
     this.visible=false;
   }
   renderData(){
-    console.log(1);
     if(this.report != null)
     {
       this._getconfigurationservice.getData(this.report.ReportName)

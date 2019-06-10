@@ -21,15 +21,25 @@ namespace ReportingService.Controllers
         }
         public IEnumerable<dynamic> Get(string spName, [FromUri]dynamic parameter)
         {
-            var parameterPair = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(parameter);
-            var cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
+            Dictionary<string,string> parameterPair; 
+            string cs;
+            try
+            {
+                parameterPair = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(parameter);
+                cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
+            }
+            catch(Exception e)//handling exceptions that occur during deserialisation
+            {
+                yield break;
+            }
             SqlDataReader reader;
             //try
             {
                 using (var con = new SqlConnection(cs))
                 {
-                    using (var cmd = new SqlCommand(spName, con))
+                    try
                     {
+                        var cmd = new SqlCommand(spName, con);
                         cmd.CommandType = CommandType.StoredProcedure;
                         if (parameter != null)
                         {
@@ -40,22 +50,26 @@ namespace ReportingService.Controllers
                         }
                         con.Open();
                         reader = cmd.ExecuteReader();
-                        if (reader.Read())
+                    }
+                    catch(Exception e)
+                    {
+                        yield break;
+                    }
+                    if (reader.Read())
+                    {
+                        var cols = reader.GetSchemaTable()
+                                     .Rows
+                                     .OfType<DataRow>()
+                                     .Select(r => r["ColumnName"]).ToList();
+                        do
                         {
-                            var cols = reader.GetSchemaTable()
-                                         .Rows
-                                         .OfType<DataRow>()
-                                         .Select(r => r["ColumnName"]).ToList();
-                            do
-                            {
-                                dynamic t = new System.Dynamic.ExpandoObject();
+                            dynamic t = new System.Dynamic.ExpandoObject();
 
-                                cols.ForEach(x => ((IDictionary<System.String, System.Object>)t)[x.ToString()] = reader[x.ToString()]);
+                            cols.ForEach(x => ((IDictionary<System.String, System.Object>)t)[x.ToString()] = reader[x.ToString()]);
 
 
-                                yield return t;
-                            } while (reader.Read());
-                        }
+                            yield return t;
+                        } while (reader.Read());
                     }
                 }
             }

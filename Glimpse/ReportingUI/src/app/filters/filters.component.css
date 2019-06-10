@@ -21,7 +21,7 @@
     z-index: 1;
     top: 90;
     left: 0;
-    margin-left: 250px;
+    margin-left: 260px;
     background-color:white;
     overflow-x: hidden;
     transition: 0.5s;
@@ -57,8 +57,24 @@
 
 .right-addon input { padding-right: 0px; }
 .right-addon select { padding-right: 0px; }
+
 select{
   margin-right:10px;
   margin-left:10px;
   width:230px;
+}
+
+.row {
+  width: 100%;
+  margin: 0 auto;
+}
+.block {
+  width: 100px;
+  float: left;
+}
+
+.ex1 {
+  width: 260px;
+  height: 100%;
+  overflow: scroll;
 }
