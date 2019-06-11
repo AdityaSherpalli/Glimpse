@@ -78,3 +78,43 @@ select{
   height: 100%;
   overflow: scroll;
 }
+.selectdiv {
+  position: relative;
+  margin-right:10px;
+  margin-left:28px;
+  float: left;
+  min-width: 230px;
+}
+
+.selectdiv:after {
+    content:'\f0d7';
+    font: normal normal normal 17px/1 FontAwesome;
+    color: rgb(79, 185, 74);
+    right:30px;
+    top: 6px;
+    padding: 15px 0px 0px 8px;
+    border-left: 2px rgb(79, 185, 74);
+    position: absolute;
+    pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  padding: 0px 24px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  background-color: #ffffff;
+  background-image: none;
+  border: 2px solid rgb(79, 185, 74);
+  -ms-word-break: normal;
+  word-break: normal;
+}

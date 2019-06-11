@@ -15,18 +15,23 @@
       <h4 *ngIf="report" style="text-align:center;font-size: x-large">Report {{report.DisplayName}}</h4>
     </b>
     <b>
-      <h4 *ngIf="!report" style="text-align:center;font-size: x-large">No Report Selected</h4>
+      <div id="noreport"><h4 style="text-align:center;font-size: x-large">No Report Selected</h4>
+        <h5>Filters Applied : None</h5>
+      </div>
     </b>
     <hr />
   </div>
-  <div>
-    <h5 *ngIf="!report">Filters Applied : None</h5>
+  <div class="scroller">
+   
     <h5 *ngIf="report">Filters Applied</h5>
-    <ul *ngFor="let param of config.Parameters">
-      <li>{{param.displayName}}:{{parameters[param.Name]}}</li>
-    </ul>
-    <hr style="border:1px solid" />
+    <div class="row">
+        <div class="column" *ngFor="let param of config.Parameters">   
+      <p>{{param.displayName}}:{{parameters[param.Name]}}</p>
+            
+        </div>
+    </div>
   </div>
+  <hr style="border: 1px solid">
   <div class="ex1">
     <table mat-table matSort [dataSource]="renderData" class="mat-elevation-z8">
       <ng-container *ngFor="let col of keyss" matColumnDef="{{col}}">
