@@ -5,7 +5,6 @@ import { Configuration } from '../DTO/Configuration';
 import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
 import { keyframes } from '@angular/animations';
 
-
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
@@ -14,6 +13,7 @@ import { keyframes } from '@angular/animations';
 export class ReportComponent implements OnInit {
   @Input() report:ReportName;
   @Input() parameters:{};
+  @Input()reportPresent:boolean;
   @Input() config:Configuration;
   @Input() selectedValue:string;
   @ViewChild(MatSort) sort:MatSort;
@@ -29,11 +29,11 @@ export class ReportComponent implements OnInit {
   arrayOne(n: number): any[] {
     return Array(n);
   }
-
   ngOnInit(){
   }
   ngOnChanges() {
-    this._getReport.getData(this.config.StoredProcedureName, this.parameters)
+    if(this.reportPresent==true)document.getElementById("noreport").style.display="none";
+        this._getReport.getData(this.config.StoredProcedureName, this.parameters)
     .subscribe
     (
       data=>
@@ -46,6 +46,5 @@ export class ReportComponent implements OnInit {
         this.renderData.paginator=this.paginator;
       }
     );
-
   }
 }

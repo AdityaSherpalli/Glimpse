@@ -23,11 +23,20 @@ export class FiltersComponent implements OnInit {
   parameters:{};
   date:string;
   lstRepo:ReportName[];
+  reportPresent:boolean;
   constructor(private _populateddldataservice: PopulateDDLDataService, 
     private _getconfigurationservice: GetConfigurationService,
     private _getreportsnameservice:GetReportsNameService) {
       this.parameters = new Map<string, string>();
       this.report=new ReportName();
+    if(this.report.DisplayName==null)
+    {
+      this.reportPresent=false;
+    }
+    else
+    {
+      this.reportPresent=true;
+    }
     }
   ngOnInit() {
     this.visible=true;
@@ -75,18 +84,25 @@ export class FiltersComponent implements OnInit {
     this.report.DisplayName=this.GetReportName(this.report.ReportName);
     this.parameters={};
     this.renderData();
+    if(this.report.DisplayName==null)
+    {
+      this.reportPresent=false;
+    }
+    else{
+      this.reportPresent=true;
+    }
   }
   openNav()
   {
-    document.getElementById("mySidenav").style.width="250px";
-    document.getElementById("mySidenav1").style.marginLeft="250px";
+    document.getElementById("mySidenav").style.width="260px";
+    document.getElementById("mySidenav1").style.marginLeft="260px";
     document.getElementById("main").style.marginLeft="270px"
     this.visible=true;
   }
   closeNav()
   {
     document.getElementById("mySidenav").style.width="0px";
-    document.getElementById("mySidenav1").style.marginLeft="0px";
+    document.getElementById("mySidenav1").style.marginLeft="20px";
     document.getElementById("main").style.marginLeft="20px"
     this.visible=false;
   }

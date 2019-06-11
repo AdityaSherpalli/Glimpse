@@ -1,25 +1,51 @@
 
 table {
-    width: 100%;
-  }
+  width: 100%;
+}
 
-  .hide
-  {
-    display: none;
-  }
+.hide
+{
+  display: none;
+}
 
-  mat-footer-row mat-footer-cell
-  {
-    justify-content: center;
-    font-style: italic;
+  .column {
+    width:33.3%;
+    display: block;
+    margin-bottom: 0px;
+    float: left;
+    padding: 0 20px;
+    text-align:left;
   }
-  .navbar-fixed-top
-  {
-    margin-top: 100px;
-  }
+ 
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
 
-  .ex1 {
-    width:100%-220px;
-    height: 320px;
-    overflow: scroll;
-  }
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+mat-footer-row mat-footer-cell
+{
+  justify-content: center;
+  font-style: italic;
+}
+.navbar-fixed-top
+{
+  margin-top: 100px;
+}
+
+.ex1 {
+  width:100%-220px;
+  height: 320px;
+  overflow: scroll;
+}
+.scroller
+{
+  width:100%-220px;
+  height: 130px;
+  overflow:scroll;
+  overflow-x: hidden;
+}
