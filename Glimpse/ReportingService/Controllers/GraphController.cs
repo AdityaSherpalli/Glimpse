@@ -8,25 +8,11 @@ using System.Configuration;
 
 namespace ReportingService.Controllers
 {
-    public class ReportController : ApiController
+    public class GraphController : ApiController
     {
-        public dynamic Get()
+        public IEnumerable<dynamic> Get(string spName)
         {
-            return null;
-        }
-        public IEnumerable<dynamic> Get(string spName, [FromUri]dynamic parameter)
-        {
-            Dictionary<string,string> parameterPair; 
-            string cs;
-            try
-            {
-                parameterPair = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(parameter);
-                cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
-            }
-            catch(Exception e)//handling exceptions that occur during deserialisation
-            {
-                yield break;
-            }
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString(); ;
             SqlDataReader reader;
             //try
             {
@@ -36,17 +22,10 @@ namespace ReportingService.Controllers
                     {
                         var cmd = new SqlCommand(spName, con);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        if (parameter != null)
-                        {
-                            foreach (KeyValuePair<string, string> pair in parameterPair)
-                            {
-                                cmd.Parameters.AddWithValue(pair.Key, pair.Value);
-                            }
-                        }
                         con.Open();
                         reader = cmd.ExecuteReader();
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         yield break;
                     }

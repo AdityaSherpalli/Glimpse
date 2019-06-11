@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GetDataService } from './services/GetData.service';
 import { GetReportsNameService } from './services/GetReportsName.service';
+import {GetGraphDataService} from './services/GetGraphData.service';
 import { FiltersComponent } from './filters/filters.component';
 import { GetConfigurationService } from './services/GetConfiguration.service';
 import { PopulateDDLDataService } from './services/PopulateDDLData.service';
@@ -16,6 +17,10 @@ import { DashBoardComponent } from './dash-board/dash-board.component';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
   MatSortModule, MatTableModule } from "@angular/material";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ChartsModule} from 'ng2-charts';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReportComponent,
     HeaderComponent,
     FiltersComponent,
-    DashBoardComponent
+    DashBoardComponent,
+    BarChartComponent,
+    LineChartComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +43,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ChartsModule
   ],
-  providers: [GetDataService, GetReportsNameService, GetConfigurationService, PopulateDDLDataService, GetReport],
+  providers: [GetDataService,GetGraphDataService, GetReportsNameService, GetConfigurationService, PopulateDDLDataService, GetReport],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,21 @@
+<div class="row well">
+  <div class="col-md-4" style="margin-top: 70px">
+    <div class="alignform">
+        <div class="form-group">
+          <label for="textbox">Stored Procedure Name</label>
+          <input  class="form-control" type="text" #titleInput/>
+          <div class="block1">
+              <button class="btn btn-success form-control block2" (click)="OnSubmit(titleInput.value)">Submit</button>
+              <button class="btn btn-success form-control block3" (click)="GetData()">Refresh</button>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-8" style="margin-top: 10px">
+    <h1 style="text-align: center">Bar Chart</h1>
+    <div style="display: block">
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+        [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    </div>
+  </div>
+</div>
