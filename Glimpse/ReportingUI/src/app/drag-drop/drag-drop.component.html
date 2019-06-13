@@ -3,7 +3,7 @@
     <div class="panel panel-success">
       <div class="panel-heading">Barchart</div>
       <div class="panel-body">
-        <div class="panel panel-default"  id="side3" dnd-draggable [dragEnabled]="true">
+        <div class="panel panel-default" id="side3" dnd-draggable [dragEnabled]="true" dragData="bar">
           <div class="panel-body">
             <img src="assets/barchart.png" width="100%">
           </div>
@@ -15,7 +15,7 @@
     <div class="panel panel-success">
       <div class="panel-heading">Piechart</div>
       <div class="panel-body">
-        <div class="panel panel-default" dnd-draggable [dragEnabled]="true">
+        <div class="panel panel-default" dnd-draggable [dragEnabled]="true" dragData="pie">
           <div class="panel-body">
             <img src="assets/piechart.png" width="100%">
           </div>
@@ -27,7 +27,7 @@
     <div class="panel panel-success">
       <div class="panel-heading">Linechart</div>
       <div class="panel-body">
-        <div class="panel panel-default" dnd-draggable [dragEnabled]="true">
+        <div class="panel panel-default" dnd-draggable [dragEnabled]="true" dragData="line">
           <div class="panel-body">
             <img src="assets/linechart.png" width="100%">
           </div>
@@ -36,12 +36,33 @@
     </div>
   </div>
 </div>
-<div class="row main">
-  <div class="col-sm-3">
-    <div dnd-droppable class="panel panel-info" (onDropSuccess)="simpleDrop=$event">
-      <div class="panel-heading">Place to drop</div>
-      <div class="panel-body">
-        <div *ngIf="simpleDrop">Item was dropped here</div>
+<div class="main">
+  <div style="width: 33%">
+    <div dnd-droppable class="panel panel-info"  (onDropSuccess)="dropped($event)">
+      <div *ngIf="!simpleDrop" class="panel-heading">Place to drop</div>
+      <div class="panel-body" >
+        <h1 style="text-align: center;font-size: 19px">{{displayName}}</h1>
+        <div *ngIf="simpleDrop">
+          <div *ngIf="chartType==='bar'">
+            <div style="display: block">
+              <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+            </div>
+            
+          </div>
+          <div *ngIf="chartType==='line'">
+              <div style="display: block">
+                <canvas baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+                  [legend]="true" (chartClick)="onChartClick($event)">
+                </canvas>
+              </div>
+          </div>
+          <div *ngIf="chartType==='pie'">
+              <div style="display: block">
+                <canvas  style="font-size: 5px" [legend]="false" baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"></canvas>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

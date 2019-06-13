@@ -76,7 +76,7 @@ export class FiltersComponent implements OnInit {
     this.selectedValue = this.parameters[event.target.id];
   }
   onSelectDdlFilter(event: any): void {
-    this.parameters[event.target.id] = this.dlldata[event.target.id].find(x => x.key == event.target.value).value;
+    this.parameters[event.target.id] = event.target.value;
     this.selectedValue = this.parameters[event.target.id];
   }
   onSelectDdl(event: any): void {

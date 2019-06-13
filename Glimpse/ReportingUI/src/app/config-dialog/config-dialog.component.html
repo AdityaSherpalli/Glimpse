@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Chart</h1>
+<div mat-dialog-content>
+  <p>Display Name:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.displayName">
+  </mat-form-field>
+  <p>Stored Procedure Name:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.spName">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn btn-success" (click)="onNoClick()">Cancel</button>&nbsp;&nbsp;
+  <button mat-button class="btn btn-success" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
