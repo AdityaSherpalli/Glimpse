@@ -21,6 +21,10 @@ import {ChartsModule} from 'ng2-charts';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { DragDropComponent } from './drag-drop/drag-drop.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import {DndModule} from 'ng2-dnd';
+import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     DashBoardComponent,
     BarChartComponent,
     LineChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    DragDropComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,10 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    ChartsModule
+    ChartsModule,
+    DndModule.forRoot(),
+    NgxDaterangepickerMd.forRoot(),
+    FormsModule
   ],
   providers: [GetDataService,GetGraphDataService, GetReportsNameService, GetConfigurationService, PopulateDDLDataService, GetReport],
   bootstrap: [AppComponent]

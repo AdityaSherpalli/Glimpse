@@ -37,9 +37,9 @@
           "DefaultValue": "ALL"
         },
         {
-          "Name": "@date",
+          "Name": "@startdate,@enddate",
           "displayName": "HireDate",
-          "Type": "date",
+          "Type": "dateRange",
           "PrePopulate": "false",
           "StoredProcedureName": " ",
           "DefaultValue": "0"

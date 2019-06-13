@@ -1,0 +1,28 @@
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 90;
+    left: 0;
+    background-color:white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+  }
+
+  .ex1 {
+    width: 260px;
+    height: 100%;
+    overflow: scroll;
+  }
+  .main
+  {
+    margin-top: 70px;
+    margin-left: 250px;
+  }
+
+  .side3
+  {
+    height: 100px;
+  }

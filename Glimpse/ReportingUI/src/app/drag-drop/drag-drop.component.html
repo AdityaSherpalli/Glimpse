@@ -1,0 +1,48 @@
+<div id="mySidenav" class="sidenav ex1">
+  <div class="col-md-12">
+    <div class="panel panel-success">
+      <div class="panel-heading">Barchart</div>
+      <div class="panel-body">
+        <div class="panel panel-default"  id="side3" dnd-draggable [dragEnabled]="true">
+          <div class="panel-body">
+            <img src="assets/barchart.png" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-success">
+      <div class="panel-heading">Piechart</div>
+      <div class="panel-body">
+        <div class="panel panel-default" dnd-draggable [dragEnabled]="true">
+          <div class="panel-body">
+            <img src="assets/piechart.png" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-success">
+      <div class="panel-heading">Linechart</div>
+      <div class="panel-body">
+        <div class="panel panel-default" dnd-draggable [dragEnabled]="true">
+          <div class="panel-body">
+            <img src="assets/linechart.png" width="100%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row main">
+  <div class="col-sm-3">
+    <div dnd-droppable class="panel panel-info" (onDropSuccess)="simpleDrop=$event">
+      <div class="panel-heading">Place to drop</div>
+      <div class="panel-body">
+        <div *ngIf="simpleDrop">Item was dropped here</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { FiltersComponent } from './filters/filters.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { DragDropComponent } from './drag-drop/drag-drop.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path:'barchart',
     component:BarChartComponent
+  },
+  {
+    path:'dragdrop',
+    component:DragDropComponent
   },
   {
     path:'linechart',

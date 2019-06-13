@@ -20,7 +20,6 @@ namespace ReportingService.Controllers
                 var cs = ConfigurationManager.ConnectionStrings["DBCS"].ToString();
                 SqlDataReader rdr;
                 var queryResult = new List<DdlDTO>();
-                int counter = 1;
                 using (var con = new SqlConnection(cs))
                 {
                     using (var cmd = new SqlCommand(SpName, con))
@@ -32,8 +31,8 @@ namespace ReportingService.Controllers
                         {
                             queryResult.Add(new DdlDTO
                             {
-                                value = rdr["dname"].ToString(),
-                                index = counter++
+                                value = rdr["value"].ToString(),
+                                key = rdr["key"].ToString()
                             });
                         }
                     }
