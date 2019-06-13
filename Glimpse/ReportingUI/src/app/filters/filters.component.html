@@ -30,11 +30,11 @@
                             <div *ngIf="param.Type === 'int'" class="form-group">
                                 <label style="margin-left: 15px">{{param.displayName}}</label>
                                 <div class="inner-addon right-addon">
-                                    <select class="form-control" id={{param.Name}} (change)="onSelect($event)">
+                                    <select class="form-control" id={{param.Name}} (change)="onSelectDdlFilter($event)">
                                         <option value="{{param.DefaultValue}}" selected="selected">
-                                            {{param.DefaultValue}}
+                                            Please Select
                                         </option>
-                                        <option *ngFor="let data of dlldata" value={{data.value}}>
+                                        <option *ngFor="let data of dlldata[param.Name]" value={{data.key}}>
                                             {{data.value}}
                                         </option>
                                     </select>

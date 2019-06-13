@@ -5,6 +5,7 @@ import { GetConfigurationService } from '../services/GetConfiguration.service';
 import { GetReportsNameService } from '../services/GetReportsName.service';
 import { ReportName } from '../DTO/ReportName'
 import { Configuration } from '../DTO/Configuration';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-filters',
@@ -15,7 +16,7 @@ export class FiltersComponent implements OnInit {
   report: ReportName;
   listData: DLLdata;
   config: Configuration;
-  dlldata: DLLdata[];
+  dlldata: {};
   selectedValue: string;
   dateRangeSplitter:string[];
   visible: boolean = true;
@@ -29,6 +30,7 @@ export class FiltersComponent implements OnInit {
     private _getconfigurationservice: GetConfigurationService,
     private _getreportsnameservice: GetReportsNameService) {
     this.parameters = new Map<string, string>();
+    this.dlldata=new Map<string,DLLdata>();
     this.report = new ReportName();
     if (this.report.DisplayName == null) {
       this.reportPresent = false;
@@ -74,7 +76,7 @@ export class FiltersComponent implements OnInit {
     this.selectedValue = this.parameters[event.target.id];
   }
   onSelectDdlFilter(event: any): void {
-    this.parameters[event.target.id] = this.dlldata.find(x => x.key = event.target.value).value;
+    this.parameters[event.target.id] = this.dlldata[event.target.id].find(x => x.key == event.target.value).value;
     this.selectedValue = this.parameters[event.target.id];
   }
   onSelectDdl(event: any): void {
@@ -115,11 +117,13 @@ export class FiltersComponent implements OnInit {
               if (this.config.Parameters[i].Type == "int") {
                 this.parameters[this.config.Parameters[i].Name] = this.config.Parameters[i].DefaultValue;
                 if (this.config.Parameters[i].PrePopulate == true) {
+                  let filterName=this.config.Parameters[i].Name;
                   this._populateddldataservice.getData(this.config.Parameters[i].StoredProcedureName)
                     .subscribe
                     (
+                      
                       data => {
-                        this.dlldata = data;
+                        this.dlldata[filterName] = data;
                       }
                     )
                 }
