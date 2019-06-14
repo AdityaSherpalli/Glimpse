@@ -41,3 +41,18 @@
     height:20%;
     width:70%;
   }
+  .row {margin: 0 -5px;}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column {
+  width:33.3%;
+  display: block;
+  margin-bottom: 0px;
+  float: left;
+  padding: 0 10px;
+  text-align:left;
+}

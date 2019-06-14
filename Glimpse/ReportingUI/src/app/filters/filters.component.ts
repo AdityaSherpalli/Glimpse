@@ -71,13 +71,15 @@ export class FiltersComponent implements OnInit {
   GetReportName(Name: string): string {
     return this.lstRepo.find(x => x.ReportName == Name).DisplayName;
   }
-  onSelect(event: any): void {
+  onSelect(event: any): void 
+  {
     this.parameters[event.target.id] = event.target.value;
     this.selectedValue = this.parameters[event.target.id];
   }
-  onSelectDdlFilter(event: any): void {
-    this.parameters[event.target.id] = event.target.value;
-    this.selectedValue = this.parameters[event.target.id];
+  onSelectDdlFilter(event: any): void
+   {
+      this.parameters[event.target.id] = event.target.value;
+      this.selectedValue = this.parameters[event.target.id];
   }
   onSelectDdl(event: any): void {
     this.report.ReportName = event.target.value;

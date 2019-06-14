@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ReportingService.Dtos
 {
-    public class SqlParamDto
+    public class FilterDto
     {
         public string Name { get; set; }
         public string displayName { get; set; }

@@ -129,7 +129,7 @@
     <Compile Include="Dtos\ConfigDto.cs" />
     <Compile Include="Dtos\ConfigurationDto.cs" />
     <Compile Include="Dtos\DdlDTO.cs" />
-    <Compile Include="Dtos\SqlParamDto.cs" />
+    <Compile Include="Dtos\FilterDto.cs" />
     <Compile Include="Enums\UIDisplayType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

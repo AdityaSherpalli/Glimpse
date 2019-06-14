@@ -6,6 +6,7 @@ namespace ReportingService.Dtos
     {
         public string ReportName { get; set; }
         public string StoredProcedureName { get; set; }
-        public List<SqlParamDto> Parameters { get; set; }
+        public bool HasDefaultFilters { get; set; }
+        public List<FilterDto> Parameters { get; set; }
     }
 }
