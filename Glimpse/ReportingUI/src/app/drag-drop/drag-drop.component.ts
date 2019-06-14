@@ -13,6 +13,7 @@ export class DragDropComponent {
   chartType: string;
   displayName: string;
   spName: string;
+  visible: boolean = true;
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -36,6 +37,7 @@ export class DragDropComponent {
   /************************************************************************/
   xaxis: string[] = [];
   yaxis: string[] = [];
+  arr:number[]=[1,2,3];
   _label: string=null;
   comms: any;
   keyss: any;
@@ -43,7 +45,10 @@ export class DragDropComponent {
 
   constructor(public dialog: MatDialog, private _getgraphdataservice: GetGraphDataService) { }
 
-
+  OnInit()
+  {
+    this.visible=true;
+  }
   dropped(event: any) {
     this.simpleDrop = event;
     console.log(this.chartType);
@@ -108,5 +113,17 @@ export class DragDropComponent {
       { data: this.yaxis, label: this._label }
     ];
     this.chartLabels = this.xaxis;
+  }
+  openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+    document.getElementById("mySidenav1").style.marginLeft = "200px";
+    document.getElementById("main").style.marginLeft = "220px"
+    this.visible = true;
+  }
+  closeNav() {
+    document.getElementById("mySidenav").style.width = "0px";
+    document.getElementById("mySidenav1").style.marginLeft = "0px";
+    document.getElementById("main").style.marginLeft = "20px"
+    this.visible = false;
   }
 }
