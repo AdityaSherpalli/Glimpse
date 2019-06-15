@@ -1,4 +1,6 @@
-<h1 mat-dialog-title>Chart</h1>
+<div *ngIf="data.chartType==='table'; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock><h1 mat-dialog-title>Table</h1></ng-template>
+<ng-template #elseBlock><h1 mat-dialog-title>{{data.chartType | titlecase}} Chart</h1></ng-template>
 <div mat-dialog-content>
   <p>Display Name:</p>
   <mat-form-field>

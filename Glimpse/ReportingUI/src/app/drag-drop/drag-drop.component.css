@@ -61,3 +61,15 @@
   padding: 0 10px;
   text-align:left;
 }
+table
+{
+  width:100%;
+}
+thead {width:100%;}
+thead, tbody { display: block; }
+
+tbody {
+    height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

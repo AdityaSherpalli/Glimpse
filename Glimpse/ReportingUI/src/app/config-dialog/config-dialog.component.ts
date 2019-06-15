@@ -7,6 +7,7 @@ export interface DialogData{
 }
 @Component({
   selector: 'app-config-dialog',
+  template: 'passed in {{ data.chartType }}',
   templateUrl: './config-dialog.component.html',
   styleUrls: ['./config-dialog.component.css']
 })
@@ -14,7 +15,9 @@ export class ConfigDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ConfigDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log(data.chartType);
+    }
 
   onNoClick(): void {
     this.dialogRef.close();

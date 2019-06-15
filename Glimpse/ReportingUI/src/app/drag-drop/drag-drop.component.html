@@ -97,13 +97,27 @@
                   </div>
                 </div>
                 <div>
-                    <div *ngIf="chartType[a+a1]==='table'">
-                      <div style="display: block">
-                        <table>
-                        </table>
-                      </div>
+                  <div *ngIf="chartType[a+a1]==='table'">
+                    <div style="display: block">
+                      <table border="1">
+                        <thead width="100%">
+                        <tr>
+                          <th *ngFor="let key of keyss">
+                            {{key}}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of arrayOne(rows); let i = index;">
+                          <td *ngFor="let key of keyss">
+                            {{comms[i][key]}}
+                          </td>
+                        </tr>
+                      </tbody>
+                      </table>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
           </div>

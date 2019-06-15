@@ -26,6 +26,7 @@ export class DragDropComponent {
   id: string;
   comms: any;
   keyss: any;
+  rows: number;
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -59,12 +60,17 @@ export class DragDropComponent {
   OnInit() {
     this.visible = true;
   }
+
+  arrayOne(n: number): any[] {
+    return Array(n);
+  }
+
   dropped(a: string, event: any) {
     this.id = a;
     this.chartType[this.id] = event.dragData;
     const dialogRef = this.dialog.open(ConfigDialogComponent, {
       width: '250px',
-      data: {}
+      data: {chartType: event.dragData}
     });
     dialogRef.afterClosed().subscribe(result => {
       this.displayName[this.id] = result.displayName;
@@ -80,6 +86,7 @@ export class DragDropComponent {
       (
         data => {
           this.comms = data;
+          this.rows=this.comms.length;
           if (this.comms.length != 0) this.keyss = Object.keys(this.comms[0]);
           for (var i = 0; i < this.comms.length; i++) {
             for (let key of this.keyss) {
@@ -138,6 +145,7 @@ export class DragDropComponent {
   {
     this.table1[this.id]=this.xaxis;
     this.table2[this.id]=this.yaxis;
+    this.simpleDrop[this.id] = "1";
   }
   openNav() {
     document.getElementById("mySidenav").style.width = "200px";
