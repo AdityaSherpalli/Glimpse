@@ -2,37 +2,43 @@
   @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 </style>
 <div class="well">
-  <div style="padding-right:50px;padding-top: 10px;">
-    <a class="navbar-nav navbar-right" style="cursor: pointer;margin-left:10px">
-      <span class="glyphicon glyphicon-print" style="font-size: 20px"></span></a>
-    <a class="navbar-nav navbar-right" style="cursor: pointer;">
-      <span class="glyphicon glyphicon-floppy-disk" style="font-size: 20px"></span></a>
-    <a class="navbar-nav navbar-right" style="cursor: pointer;padding-right: 10px">
-      <span class="glyphicon glyphicon-download-alt" style="font-size: 20px"></span></a>
-  </div>
-  <div>
-    <b>
-      <h4 *ngIf="report" style="text-align:center;font-size: x-large">Report {{report.DisplayName}}</h4>
-    </b>
-    <b>
-      <div id="noreport"><h4 style="text-align:center;font-size: x-large">No Report Selected</h4>
-        <h5>Filters Applied : None</h5>
-      </div>
-    </b>
-    <hr />
-  </div>
-  <div class="scroller">
-   
-    <h5 *ngIf="report">Filters Applied</h5>
-    <div class="row">
-        <div class="column" *ngFor="let param of config.Parameters">   
-      <p>{{param.displayName}}:{{parameters[param.Name]}}</p>
-            
-        </div>
+  <div class="navbar-fixed-top">
+    <div style="padding-right:50px;padding-top: 10px;">
+      <a class="navbar-nav navbar-right" style="cursor: pointer;margin-left:10px">
+        <span class="glyphicon glyphicon-print" style="font-size: 20px"></span></a>
+      <a class="navbar-nav navbar-right" style="cursor: pointer;">
+        <span class="glyphicon glyphicon-floppy-disk" style="font-size: 20px"></span></a>
+      <a class="navbar-nav navbar-right" style="cursor: pointer;padding-right: 10px">
+        <span class="glyphicon glyphicon-download-alt" style="font-size: 20px"></span></a>
     </div>
+    <div>
+        <h4 id="noreport" style="text-align:center;font-size: x-large">No Report Selected</h4>
+    </div>
+    <div>
+      <b>
+        <h4 *ngIf="report" style="text-align:center;font-size: x-large">{{name}}</h4>
+      </b>
+      <hr />
+    </div>
+    <div class="scroller">
+
+      <h5 *ngIf="report">Filters Applied</h5>
+      <div class="row">
+        <div class="column" *ngFor="let param of config.Parameters">
+          <p>{{param.displayName}}:{{parameters[param.Name]}}</p>
+
+        </div>
+      </div>
+      <div class="row" *ngIf="showDefaultFilters">
+        <div class="column" *ngFor="let param of DefaultFilters">
+          <p>{{param.displayName}}:{{parameters[param.Name]}}</p>
+
+        </div>
+      </div>
+    </div>
+    <hr style="border: 1px solid">
   </div>
-  <hr style="border: 1px solid">
-  <div class="ex1">
+  <div class="ex1" style="margin-top: 250px">
     <table mat-table matSort [dataSource]="renderData" class="mat-elevation-z8">
       <ng-container *ngFor="let col of keyss" matColumnDef="{{col}}">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col}} </th>
@@ -53,8 +59,6 @@
       <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':renderData!=null}"></mat-footer-row>
       <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!renderData!=null}"></mat-footer-row>
     </table>
-  </div>
-  <div>
     <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="5"></mat-paginator>
   </div>
 </div>

@@ -37,6 +37,18 @@
           </div>
         </div>
       </div>
+      <div class="type">
+        <div class="panel panel-success">
+          <div class="panel-heading">Table</div>
+          <div class="panel-body">
+            <div class="panel panel-default" dnd-draggable [dragEnabled]="true" dragData="table">
+              <div class="panel-body">
+                <img src="assets/table.png" width="100%">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="sidenav1" id="mySidenav1">
@@ -51,18 +63,18 @@
 <div class="main" id="main">
   <div>
     <div *ngFor="let a of arr" class="row">
-      <div *ngFor="let a1 of arr1" class="column" >
-        <div >
-          <div id="{{a+a1}}" dnd-droppable class="panel panel-info" (onDropSuccess)="dropped(a+a1,$event)">
-            <div *ngIf="!simpleDrop[a+a1]" class="panel-heading">Place to drop</div>
-            <div class="panel-body">
+      <div *ngFor="let a1 of arr1" class="column">
+        <div>
+          <div id="{{a+a1}}" dnd-droppable style="height:250px;background-color: white"
+            (onDropSuccess)="dropped(a+a1,$event)">
+            <div>
               <h1 *ngIf="simpleDrop[a+a1]" style="text-align: center;font-size: 19px">{{displayName[a+a1]}}</h1>
               <div *ngIf="simpleDrop[a+a1]">
                 <div>
                   <div *ngIf="chartType[a+a1]==='bar'">
                     <div style="display: block">
-                      <canvas baseChart [datasets]="barChartData[a+a1]" [labels]="barChartLabels[a+a1]" [options]="barChartOptions"
-                        [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                      <canvas baseChart [datasets]="barChartData[a+a1]" [labels]="barChartLabels[a+a1]"
+                        [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
                     </div>
                   </div>
                 </div>
@@ -70,8 +82,8 @@
                   <div *ngIf="chartType[a+a1]==='line'">
                     <div style="display: block">
                       <canvas baseChart [chartType]="'line'" [datasets]="lineChartData[a+a1]"
-                       [labels]="lineChartLabels[a+a1]"
-                        [options]="chartOptions" [legend]="true" (chartClick)="onChartClick($event)">
+                        [labels]="lineChartLabels[a+a1]" [options]="chartOptions" [legend]="true"
+                        (chartClick)="onChartClick($event)">
                       </canvas>
                     </div>
                   </div>
@@ -84,6 +96,14 @@
                     </div>
                   </div>
                 </div>
+                <div>
+                    <div *ngIf="chartType[a+a1]==='table'">
+                      <div style="display: block">
+                        <table>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>

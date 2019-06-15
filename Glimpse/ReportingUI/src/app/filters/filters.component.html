@@ -4,20 +4,20 @@
         <div class="navbar-fixed-top">
             <div id="mySidenav" class="sidenav ex1">
                 <div class="selectdiv">
-                    <select style="margin-right: 20px" 
-                    class="mdb-select md-form btn btn-success" (change)="onSelectDdl($event)" id="MainDdl">
+                    <select style="margin-right: 20px" class="mdb-select md-form btn btn-success"
+                        (change)="onSelectDdl($event)" id="MainDdl">
                         <option value="" disabled selected>Choose your option</option>
                         <option *ngFor="let report of lstRepo" value="{{report.ReportName}}">
                             {{report.DisplayName}}</option>
                     </select>
                 </div>
                 <h5 *ngIf="!report" style="text-align: center"><b>No Filters Available</b></h5>
-                <div *ngIf="report">
-                    <div style="text-align: center;padding-top: 5px;padding-bottom: 5px;">
-                        <b>Filters</b>
-                    </div>
-                    <div>
-                        <div *ngFor="let param of config.Parameters" class="form-group">
+                <div style="text-align: center;padding-top: 5px;padding-bottom: 5px;">
+                    <b>Filters</b>
+                </div>
+                <div *ngIf="DefaultVisible">
+                    <div *ngFor="let param of Defaultfilters" class="form-group">
+                        <div *ngIf="!(DefaultnotVisibleParam[param.Name]==='notVisibleParam')">
                             <div *ngIf="param.Type === 'string'">
                                 <label style="margin-left: 15px">{{param.displayName}}</label>
                                 <div class="inner-addon right-addon">
@@ -65,6 +65,60 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div *ngIf="report">
+                    <div *ngIf="render==='yes'">
+                        <div *ngFor="let param of config.Parameters" class="form-group">
+                            <div *ngIf="!(notVisibleParam[param.Name]==='notVisibleParam')">
+                                <div *ngIf="param.Type === 'string'">
+                                    <label style="margin-left: 15px">{{param.displayName}}</label>
+                                    <div class="inner-addon right-addon">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                        <input class="form-control" id={{param.Name}} value={{param.DefaultValue}}
+                                            type="text" placeholder="{{param.displayName}}"
+                                            (keyup.enter)="onSelect($event)">
+                                    </div>
+                                </div>
+                                <div *ngIf="param.Type === 'int'" class="form-group">
+                                    <label style="margin-left: 15px">{{param.displayName}}</label>
+                                    <div class="inner-addon right-addon">
+                                        <select class="form-control" id={{param.Name}}
+                                            (change)="onSelectDdlFilter($event)">
+                                            <option value="{{param.DefaultValue}}" selected="selected">
+                                                Please Select
+                                            </option>
+                                            <option *ngFor="let data of dlldata[param.Name]" value={{data.key}}>
+                                                {{data.value}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div *ngIf="param.Type === 'date'" class="form-group date">
+                                    <label style="margin-left: 15px">{{param.displayName}}</label>
+                                    <div class="inner-addon right-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                        <input class="form-control" id={{param.Name}} type="date"
+                                            (change)="onSelect($event)" value="{{date}}">
+                                    </div>
+                                </div>
+                                <div *ngIf="param.Type === 'dateRange'" class="form-group">
+                                    <label style="margin-left: 15px">{{param.displayName}}</label>
+                                    <div class="row">
+                                        <div class="inner-addon right-addon block">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                            <input class="form-control" id={{this.dateRangeSplitter[0]}} type="date"
+                                                (change)="onSelect($event)" value="{{date}}">
+                                        </div>
+                                        <div class="inner-addon right-addon block">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                            <input class="form-control" id={{this.dateRangeSplitter[1]}} type="date"
+                                                (change)="onSelect($event)" value="{{date}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div>
                         <button class="btn btn-success" (click)="Reset()">Reset</button>
                     </div>
@@ -82,6 +136,7 @@
     </div>
 </div>
 <div id="main" style="margin-top: 100px">
-    <app-report [report]="report" [config]="config" [parameters]="parameters" [selectedValue]="selectedValue" [reportPresent]="reportPresent">
+    <app-report [report]="report" [config]="config" [parameters]="parameters1" [selectedValue]="selectedValue"
+        [reportPresent]="reportPresent" [DefaultFilters]="Defaultfilters" [showDefaultFilters]="showDefaultFilters">
     </app-report>
 </div>

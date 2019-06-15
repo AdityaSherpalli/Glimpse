@@ -9,10 +9,11 @@
       "ReportName": "dept"
     }
   ],
-  "Configuration": [
+  "ReportConfiguration": [
     {
       "ReportName": "emp",
       "StoredProcedureName": "GetEmployeeDetailsByDept",
+      "HasDefaultFilters": "false",
       "Parameters": [
         {
           "Name": "@dept",
@@ -26,25 +27,44 @@
     },
     {
       "ReportName": "dept",
-      "StoredProcedureName": "GetEmployeeNames",
+      "StoredProcedureName": "GetEmployeeDetailsByDept",
+      "HasDefaultFilters": "true",
       "Parameters": [
         {
-          "Name": "@name",
-          "displayName": "Name",
+          "Name": "@dept1",
+          "displayName": "Department",
           "Type": "string",
-          "PrePopulate": "false",
-          "StoredProcedureName": " ",
+          "PrePopulate": "true",
+          "StoredProcedureName": "GetDeptDetails",
           "DefaultValue": "ALL"
-        },
-        {
-          "Name": "@startdate,@enddate",
-          "displayName": "HireDate",
-          "Type": "dateRange",
-          "PrePopulate": "false",
-          "StoredProcedureName": " ",
-          "DefaultValue": "0"
         }
       ]
+    }
+  ],
+  "DefaultFilters": [
+    {
+      "Name": "@name",
+      "displayName": "Name",
+      "Type": "string",
+      "PrePopulate": "false",
+      "StoredProcedureName": " ",
+      "DefaultValue": "ALL"
+    },
+    {
+      "Name": "@a",
+      "displayName": "age",
+      "Type": "date",
+      "PrePopulate": "false",
+      "StoredProcedureName": " ",
+      "DefaultValue": "ALL"
+    },
+    {
+      "Name": "@dept",
+      "displayName": "Department",
+      "Type": "int",
+      "PrePopulate": "true",
+      "StoredProcedureName": "GetDeptDetails",
+      "DefaultValue": "ALL"
     }
   ]
 }

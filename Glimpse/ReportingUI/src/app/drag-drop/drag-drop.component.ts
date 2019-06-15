@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ConfigDialogComponent } from '../config-dialog/config-dialog.component';
 import { GetGraphDataService } from '../services/GetGraphData.service';
-import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-drag-drop',
@@ -10,84 +9,73 @@ import { stringify } from '@angular/core/src/render3/util';
   styleUrls: ['./drag-drop.component.css']
 })
 export class DragDropComponent {
-  simpleDrop={};
-  chartType={};
-  displayName={};
-  spName: string;
+  simpleDrop = {};
+  chartType = {};
+  displayName = {};
   visible: boolean = true;
-  barChartLabels={};
-  pieChartLabels={};
-  lineChartLabels={};
-  barChartData={};
-  lineChartData={};
-  pieChartData={};
-  _label={};
-  id:string;
-
-
+  barChartLabels = {};
+  pieChartLabels = {};
+  lineChartLabels = {};
+  barChartData = {};
+  lineChartData = {};
+  pieChartData = {};
+  SpName = {};
+  _label = {};
+  table1={};
+  table2={};
+  id: string;
+  comms: any;
+  keyss: any;
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  //public barChartLabels = ['1', '2', '3', '4', '5', '6', '7'];
   public barChartType = 'bar';
   public barChartLegend = true;
-  /*public barChartData = [
-    { data: ['0', '0', '0', '0', '0', '0', '0'], label: 'series A' },
-    { data: ['0', '0', '0', '0', '0', '0', '0'], label: 'series B' }
-  ];*/
-  /*************************************************************************/
   chartOptions = { responsive: true };
- // chartData = [{ data: ['0', '0', '0', '0'], label: 'label A' }];
-  //chartLabels = ['1', '2', '3', '4'];
-  /***************************************************************************/
-  //public pieChartLabels = ['label 1'];
-  //public pieChartData = ['0', '0', '0', '0'];
   public pieChartType = 'pie';
-  /************************************************************************/
   xaxis: string[] = [];
   yaxis: string[] = [];
-  arr:string[]=['1','2'];
-  arr1:string[]=['0','1','2'];
-  comms: any;
-  keyss: any;
+  arr: string[] = ['1', '2'];
+  arr1: string[] = ['0', '1', '2'];
   j: number = 0;
 
   constructor(public dialog: MatDialog, private _getgraphdataservice: GetGraphDataService) {
-    this.pieChartData=new Map<string, string[]>();
-    this.lineChartData=new Map<string, string[]>();
-    this.barChartData=new Map<string, string[]>();
-    this.pieChartLabels=new Map<string, string[]>();
-    this.lineChartLabels=new Map<string, string[]>();
-    this.barChartLabels=new Map<string, string[]>();
-    this.simpleDrop=new Map<string,string[]>();
-    this.chartType=new Map<string,string>();
-    this._label=new Map<string,string>();
-    this.displayName=new Map<string,string>();
-   }
-
-  OnInit()
-  {
-    this.visible=true;
+    this.pieChartData = new Map<string, string[]>();
+    this.lineChartData = new Map<string, string[]>();
+    this.barChartData = new Map<string, string[]>();
+    this.pieChartLabels = new Map<string, string[]>();
+    this.lineChartLabels = new Map<string, string[]>();
+    this.barChartLabels = new Map<string, string[]>();
+    this.simpleDrop = new Map<string, string[]>();
+    this.chartType = new Map<string, string>();
+    this._label = new Map<string, string>();
+    this.displayName = new Map<string, string>();
+    this.SpName = new Map<string, string>();
+    this.table1=new Map<string,string[]>();
+    this.table2=new Map<string,string[]>();
   }
-  dropped(a:string,event:any) {
-    this.id=a;
+
+  OnInit() {
+    this.visible = true;
+  }
+  dropped(a: string, event: any) {
+    this.id = a;
     this.chartType[this.id] = event.dragData;
     const dialogRef = this.dialog.open(ConfigDialogComponent, {
       width: '250px',
-      data: { }
+      data: {}
     });
     dialogRef.afterClosed().subscribe(result => {
       this.displayName[this.id] = result.displayName;
-      this.spName = result.spName;
-      console.log(this.spName+this.displayName);
+      this.SpName[this.id] = result.spName;
       this.xaxis = [];
       this.yaxis = [];
       this.renderChart();
     });
   }
   renderChart() {
-    this._getgraphdataservice.getData(this.spName)
+    this._getgraphdataservice.getData(this.SpName[this.id])
       .subscribe
       (
         data => {
@@ -117,6 +105,9 @@ export class DragDropComponent {
     else if (this.chartType[this.id] == 'pie') {
       this.renderPie();
     }
+    else if (this.chartType[this.id] == 'table') {
+      this.renderTable();
+    }
   }
   renderBar() {
     this.barChartLabels[this.id] = this.xaxis;
@@ -142,6 +133,11 @@ export class DragDropComponent {
     this.simpleDrop[this.id] = "1";
     console.log(this.lineChartData);
     console.log(this.lineChartLabels);
+  }
+  renderTable()
+  {
+    this.table1[this.id]=this.xaxis;
+    this.table2[this.id]=this.yaxis;
   }
   openNav() {
     document.getElementById("mySidenav").style.width = "200px";

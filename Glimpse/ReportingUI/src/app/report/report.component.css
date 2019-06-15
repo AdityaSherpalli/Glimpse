@@ -34,16 +34,23 @@ mat-footer-row mat-footer-cell
 }
 .navbar-fixed-top
 {
-  margin-top: 100px;
+  margin-top: 110px;
+  margin-left:290px;
+}
+
+.well
+{
+  margin-right: 10px;
 }
 
 .ex1 {
-  width:100%-220px;
+  width:100%-20px;
   height: 320px;
   overflow: scroll;
 }
 .scroller
 {
+  margin-right: 30px;
   width:100%-220px;
   height: 130px;
   overflow:scroll;

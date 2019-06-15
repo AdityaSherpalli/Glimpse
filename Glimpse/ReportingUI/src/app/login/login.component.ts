@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   myIndex:number;
   slideIndex:number;
   length:number=5;
+  interval:any;
   constructor(private router:Router) { }
   ngOnInit() {
     this.slideIndex = 1;
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     var password=e.target[1].value;
     if(username=='admin'&&password=='admin')
     {
+      clearInterval(this.interval);
       this.router.navigate(['filters']);
     }
     else
@@ -51,6 +53,6 @@ export class LoginComponent implements OnInit {
       }
       if (this.myIndex > x.length) {this.myIndex = 1}    
       x[this.myIndex-1].style.display = "block";  
-      setInterval(this.showDivs,2000,this.myIndex);
+      this.interval= setInterval(this.showDivs,2000,this.myIndex);
     }
 }

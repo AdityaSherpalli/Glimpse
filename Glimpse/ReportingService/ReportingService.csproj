@@ -121,6 +121,7 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DefaultFiltersController.cs" />
     <Compile Include="Controllers\GraphController.cs" />
     <Compile Include="Controllers\PopulateDDLController.cs" />
     <Compile Include="Controllers\ReportController.cs" />

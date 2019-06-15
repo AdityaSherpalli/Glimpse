@@ -3,7 +3,7 @@ import { ReportName} from '../DTO/ReportName'
 import { GetReport } from '../services/GetReport.service';
 import { Configuration } from '../DTO/Configuration';
 import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
-import { keyframes } from '@angular/animations';
+import { SqlParam } from '../DTO/SqlParam';
 
 @Component({
   selector: 'app-report',
@@ -15,24 +15,35 @@ export class ReportComponent implements OnInit {
   @Input() parameters:{};
   @Input()reportPresent:boolean;
   @Input() config:Configuration;
-  @Input() selectedValue:string;
+  @Input() selectedValue:boolean;
+  @Input() showDefaultFilters:boolean;
+  @Input() DefaultFilters:SqlParam[];
   @ViewChild(MatSort) sort:MatSort;
   @ViewChild(MatPaginator) paginator:MatPaginator;
   renderData:MatTableDataSource<any>;
   constructor(private _getReport: GetReport) {
     this.parameters = new Map<string, string>();
+    
   }
   comms:any;
   keyss:any;
   rows:number;
   displayedColumns=this.keyss;
+  name:string=null;
   arrayOne(n: number): any[] {
     return Array(n);
   }
   ngOnInit(){
   }
+  GenerateFiltersToDisplay()
+  {
+    console.log(this.DefaultFilters);
+    console.log(this.showDefaultFilters);
+  }
   ngOnChanges() {
+    this.GenerateFiltersToDisplay();
     if(this.reportPresent==true)document.getElementById("noreport").style.display="none";
+    this.name="Report " + this.report.DisplayName;
         this._getReport.getData(this.config.StoredProcedureName, this.parameters)
     .subscribe
     (
