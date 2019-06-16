@@ -21,12 +21,10 @@ export class DragDropComponent {
   pieChartData = {};
   SpName = {};
   _label = {};
-  table1={};
-  table2={};
   id: string;
-  comms: any;
-  keyss: any;
-  rows: number;
+  comms={};
+  keyss={};
+  rows={};
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -53,8 +51,9 @@ export class DragDropComponent {
     this._label = new Map<string, string>();
     this.displayName = new Map<string, string>();
     this.SpName = new Map<string, string>();
-    this.table1=new Map<string,string[]>();
-    this.table2=new Map<string,string[]>();
+    this.comms=new Map<string, any>();
+    this.keyss=new Map<string, any>();
+    this.rows=new Map<String, number>();
   }
 
   OnInit() {
@@ -67,6 +66,7 @@ export class DragDropComponent {
 
   dropped(a: string, event: any) {
     this.id = a;
+    console.log(this.id);
     this.chartType[this.id] = event.dragData;
     const dialogRef = this.dialog.open(ConfigDialogComponent, {
       width: '250px',
@@ -85,18 +85,18 @@ export class DragDropComponent {
       .subscribe
       (
         data => {
-          this.comms = data;
-          this.rows=this.comms.length;
-          if (this.comms.length != 0) this.keyss = Object.keys(this.comms[0]);
-          for (var i = 0; i < this.comms.length; i++) {
-            for (let key of this.keyss) {
+          this.comms[this.SpName[this.id]] = data;
+          this.rows[this.SpName[this.id]]=this.comms[this.SpName[this.id]].length;
+          if (this.rows[this.SpName[this.id]] != 0) this.keyss[this.SpName[this.id]] = Object.keys(this.comms[this.SpName[this.id]][0]);
+          for (var i = 0; i < this.rows[this.SpName[this.id]]; i++) {
+            for (let key of this.keyss[this.SpName[this.id]]) {
               this.j = this.j + 1;
               if (this.j == 1) {
-                this.xaxis[i] = this.comms[i][key]
+                this.xaxis[i] = this.comms[this.SpName[this.id]][i][key]
               }
               else {
                 this._label[this.id] = key;
-                this.yaxis[i] = this.comms[i][key]
+                this.yaxis[i] = this.comms[this.SpName[this.id]][i][key]
               }
             }
             this.j = 0;
@@ -143,8 +143,6 @@ export class DragDropComponent {
   }
   renderTable()
   {
-    this.table1[this.id]=this.xaxis;
-    this.table2[this.id]=this.yaxis;
     this.simpleDrop[this.id] = "1";
   }
   openNav() {
