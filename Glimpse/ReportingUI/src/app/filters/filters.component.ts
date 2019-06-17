@@ -250,7 +250,6 @@ export class FiltersComponent implements OnInit {
         )
         this.render = "yes";
         this.switch=false;
-        console.log(this.parameters1);
     }
   }
 }

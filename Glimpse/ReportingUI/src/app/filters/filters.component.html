@@ -43,8 +43,7 @@
                             <div *ngIf="param.Type === 'date'" class="form-group date">
                                 <label style="margin-left: 15px">{{param.displayName}}</label>
                                 <div class="inner-addon right-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                    <input class="form-control" id={{param.Name}} type="date"
+                                    <input class="form-control" id={{param.Name}} type="datetime-local"
                                         (change)="onSelect($event)" value="{{date}}">
                                 </div>
                             </div>
@@ -97,7 +96,7 @@
                                     <label style="margin-left: 15px">{{param.displayName}}</label>
                                     <div class="inner-addon right-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
-                                        <input class="form-control" id={{param.Name}} type="date"
+                                        <input class="form-control" id={{param.Name}} type="datetime-local"
                                             (change)="onSelect($event)" value="{{date}}">
                                     </div>
                                 </div>

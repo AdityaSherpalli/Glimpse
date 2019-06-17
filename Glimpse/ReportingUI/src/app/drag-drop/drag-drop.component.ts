@@ -1,14 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ConfigDialogComponent } from '../config-dialog/config-dialog.component';
 import { GetGraphDataService } from '../services/GetGraphData.service';
+import {Dashboard} from '../DTO/Dashboard';
+import {PostDashBoardConfiguration} from '../services/PostDashBoardConfiguration.service';
 
 @Component({
   selector: 'app-drag-drop',
   templateUrl: './drag-drop.component.html',
   styleUrls: ['./drag-drop.component.css']
 })
-export class DragDropComponent {
+export class DragDropComponent implements OnInit{
+  ngOnInit(): void {
+    this.visible = true;
+    this.GetDataAndPopulate();
+  }
+  dashboardList:Dashboard[];
   simpleDrop = {};
   chartType = {};
   displayName = {};
@@ -35,11 +42,14 @@ export class DragDropComponent {
   public pieChartType = 'pie';
   xaxis: string[] = [];
   yaxis: string[] = [];
-  arr: string[] = ['1', '2'];
+  arr: string[] = ['0', '1'];
   arr1: string[] = ['0', '1', '2'];
   j: number = 0;
+  returnData:string;
+  index:number;
 
-  constructor(public dialog: MatDialog, private _getgraphdataservice: GetGraphDataService) {
+  constructor(public dialog: MatDialog, private _getgraphdataservice: GetGraphDataService,
+    private _postdashboardconfiguration:PostDashBoardConfiguration) {
     this.pieChartData = new Map<string, string[]>();
     this.lineChartData = new Map<string, string[]>();
     this.barChartData = new Map<string, string[]>();
@@ -54,31 +64,67 @@ export class DragDropComponent {
     this.comms=new Map<string, any>();
     this.keyss=new Map<string, any>();
     this.rows=new Map<String, number>();
+    this.dashboardList=new Array(6);
+    for(var i=0;i<6;i++)
+    {
+      this.dashboardList[i]=new Dashboard();
+    }
   }
-
-  OnInit() {
-    this.visible = true;
+  GetDataAndPopulate()
+  {
+    this._postdashboardconfiguration.getData().subscribe(
+      data=>{
+        this.dashboardList=data;
+        for(var i=0;i<6;i++)
+        {
+          this.id=this.dashboardList[i].Id;
+          this.SpName[this.id]=this.dashboardList[i].SpName;
+          this.chartType[this.id]=this.dashboardList[i].Type;
+          this.displayName[this.id]=this.dashboardList[i].DisplayName;
+          this.renderChart();
+        }
+      }
+    )
+    
   }
-
   arrayOne(n: number): any[] {
     return Array(n);
   }
 
   dropped(a: string, event: any) {
     this.id = a;
-    console.log(this.id);
     this.chartType[this.id] = event.dragData;
+    this.simpleDrop[this.id]=null;
     const dialogRef = this.dialog.open(ConfigDialogComponent, {
       width: '250px',
       data: {chartType: event.dragData}
     });
     dialogRef.afterClosed().subscribe(result => {
       this.displayName[this.id] = result.displayName;
+      this.index=this.GetIndex();
+      this.dashboardList[this.index].DisplayName=result.displayName;
       this.SpName[this.id] = result.spName;
+      this.dashboardList[this.index].SpName=result.spName;
+      this.dashboardList[this.index].Id=this.id;
+      this.dashboardList[this.index].Type= event.dragData;
       this.xaxis = [];
       this.yaxis = [];
+      this.postConfig();
       this.renderChart();
+      //this.GetDataAndPopulate();
     });
+  }
+  GetIndex():number
+  {
+    return(parseInt(this.id.slice(0,1))*3+parseInt(this.id.slice(1,2)));
+  }
+  postConfig()
+  {
+      this._postdashboardconfiguration.putData(this.dashboardList).subscribe(
+        data =>{
+          this.returnData=data;
+        }
+      );
   }
   renderChart() {
     this._getgraphdataservice.getData(this.SpName[this.id])
@@ -122,15 +168,11 @@ export class DragDropComponent {
       { data: this.yaxis, label: this._label[this.id] }
     ];
     this.simpleDrop[this.id] = "1";
-    console.log(this.barChartData);
-    console.log(this.barChartLabels[this.id]);
   }
   renderPie() {
     this.pieChartLabels[this.id] = this.xaxis;
     this.pieChartData[this.id] = this.yaxis;
     this.simpleDrop[this.id] = "1";
-    console.log(this.pieChartData);
-    console.log(this.pieChartLabels);
   }
   renderLine() {
     this.lineChartData[this.id] = [
@@ -138,8 +180,6 @@ export class DragDropComponent {
     ];
     this.lineChartLabels[this.id] = this.xaxis;
     this.simpleDrop[this.id] = "1";
-    console.log(this.lineChartData);
-    console.log(this.lineChartLabels);
   }
   renderTable()
   {

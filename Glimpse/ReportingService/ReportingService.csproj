@@ -121,6 +121,7 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DefaultFiltersController.cs" />
     <Compile Include="Controllers\GraphController.cs" />
     <Compile Include="Controllers\PopulateDDLController.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Controllers\UIConfigurationController.cs" />
     <Compile Include="Dtos\ConfigDto.cs" />
     <Compile Include="Dtos\ConfigurationDto.cs" />
+    <Compile Include="Dtos\Dashboard.cs" />
     <Compile Include="Dtos\DdlDTO.cs" />
     <Compile Include="Dtos\FilterDto.cs" />
     <Compile Include="Enums\UIDisplayType.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Services\JsonSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DashboardConfiguration.json" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />

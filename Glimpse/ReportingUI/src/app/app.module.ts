@@ -24,6 +24,7 @@ import {DndModule} from 'ng2-dnd';
 import {FormsModule} from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfigDialogComponent } from './config-dialog/config-dialog.component';
+import {PostDashBoardConfiguration} from './services/PostDashBoardConfiguration.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { ConfigDialogComponent } from './config-dialog/config-dialog.component';
     FormsModule,
     MatDialogModule
   ],
-  providers: [GetDataService,GetGraphDataService, GetReportsNameService,GetDefaultFilters, GetConfigurationService, PopulateDDLDataService, GetReport],
+  providers: [GetDataService,PostDashBoardConfiguration,GetGraphDataService, GetReportsNameService,GetDefaultFilters, GetConfigurationService, PopulateDDLDataService, GetReport],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

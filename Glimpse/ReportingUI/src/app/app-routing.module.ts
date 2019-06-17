@@ -20,7 +20,7 @@ const routes: Routes = [
     component:FiltersComponent
   },
   {
-    path:'dashboard',
+    path:'dragdrop1',
     component:DragDropComponent
   },
   {

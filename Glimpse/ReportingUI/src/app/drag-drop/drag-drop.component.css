@@ -78,3 +78,19 @@ tbody {
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+.component:hover canvas{
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  bottom: 50%;
+  left: 40%;
+  right:50%;
+  transform: scale(2.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: white;
+}
+
+.component:hover+#main{
+  display: none;
+}

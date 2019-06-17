@@ -1,4 +1,4 @@
-<div>
+<div style="margin-top: 70px">
   <div id="mySidenav" class="sidenav ex1">
     <div class="col-md-12">
       <div class="type">
@@ -64,16 +64,16 @@
   <div>
     <div *ngFor="let a of arr" class="row">
       <div *ngFor="let a1 of arr1" class="column">
-        <div>
+        <div class="component">
           <div id="{{a+a1}}" dnd-droppable style="height:250px;background-color: white"
             (onDropSuccess)="dropped(a+a1,$event)">
             <div>
-              <h1 *ngIf="simpleDrop[a+a1]" style="text-align: center;font-size: 19px">{{displayName[a+a1]}}</h1>
+              <h1 *ngIf="simpleDrop[a+a1]"  class="dispName" style="text-align: center;font-size: 19px">{{displayName[a+a1]}}</h1>
               <div *ngIf="simpleDrop[a+a1]">
                 <div>
                   <div *ngIf="chartType[a+a1]==='bar'">
-                    <div style="display: block">
-                      <canvas baseChart [datasets]="barChartData[a+a1]" [labels]="barChartLabels[a+a1]"
+                    <div  style="display: block">
+                      <canvas  baseChart [datasets]="barChartData[a+a1]" [labels]="barChartLabels[a+a1]"
                         [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
                     </div>
                   </div>

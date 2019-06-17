@@ -16,7 +16,6 @@ export class ConfigDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ConfigDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log(data.chartType);
     }
 
   onNoClick(): void {

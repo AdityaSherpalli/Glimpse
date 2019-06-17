@@ -35,27 +35,25 @@ export class ReportComponent implements OnInit {
   }
   ngOnInit(){
   }
-  GenerateFiltersToDisplay()
-  {
-    console.log(this.DefaultFilters);
-    console.log(this.showDefaultFilters);
-  }
+  
   ngOnChanges() {
-    this.GenerateFiltersToDisplay();
     if(this.reportPresent==true)document.getElementById("noreport").style.display="none";
     this.name="Report " + this.report.DisplayName;
-        this._getReport.getData(this.config.StoredProcedureName, this.parameters)
-    .subscribe
-    (
-      data=>
-      {
-        this.comms=data;
-        if(this.comms.length != 0) this.keyss = Object.keys(this.comms[0]);
-        this.rows=this.comms.length;
-        this.renderData=new MatTableDataSource(this.comms);
-        this.renderData.sort=this.sort;
-        this.renderData.paginator=this.paginator;
-      }
-    );
+    if(this.report.DisplayName!=null)
+    {
+      this._getReport.getData(this.config.StoredProcedureName, this.parameters)
+      .subscribe
+      (
+        data=>
+        {
+          this.comms=data;
+          if(this.comms.length != 0) this.keyss = Object.keys(this.comms[0]);
+          this.rows=this.comms.length;
+          this.renderData=new MatTableDataSource(this.comms);
+          this.renderData.sort=this.sort;
+          this.renderData.paginator=this.paginator;
+        }
+      );
+    }
   }
 }
