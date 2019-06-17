@@ -56,3 +56,17 @@ mat-footer-row mat-footer-cell
   overflow:scroll;
   overflow-x: hidden;
 }
+table td,th {
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+ padding-left: 8px;
+}
+
+table td:first-child, th:first-child {
+  border-left: none;
+}
+
+table td:last-child,th:last-child  {
+  border-right: none;
+ 
+}
