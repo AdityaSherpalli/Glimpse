@@ -97,7 +97,7 @@ export class DragDropComponent implements OnInit{
     this.simpleDrop[this.id]=null;
     const dialogRef = this.dialog.open(ConfigDialogComponent, {
       width: '250px',
-      data: {chartType: event.dragData}
+      data: {chartType: event.dragData,spName:this.SpName[this.id],displayName:this.displayName[this.id]}
     });
     dialogRef.afterClosed().subscribe(result => {
       this.displayName[this.id] = result.displayName;
@@ -127,6 +127,7 @@ export class DragDropComponent implements OnInit{
       );
   }
   renderChart() {
+    console.log("called"+this.j);
     this._getgraphdataservice.getData(this.SpName[this.id])
       .subscribe
       (
@@ -138,17 +139,21 @@ export class DragDropComponent implements OnInit{
             for (let key of this.keyss[this.SpName[this.id]]) {
               this.j = this.j + 1;
               if (this.j == 1) {
-                this.xaxis[i] = this.comms[this.SpName[this.id]][i][key]
+                this.xaxis[i] = this.comms[this.SpName[this.id]][i][key];
+                console.log(this.id);
               }
               else {
                 this._label[this.id] = key;
-                this.yaxis[i] = this.comms[this.SpName[this.id]][i][key]
+                console.log(this.id);
+                this.yaxis[i] = this.comms[this.SpName[this.id]][i][key];
               }
             }
             this.j = 0;
           }
         }
       );
+      console.log(this.id);
+      console.log(this._label);
     if (this.chartType[this.id] == 'bar') {
       this.renderBar();
     }
@@ -165,7 +170,7 @@ export class DragDropComponent implements OnInit{
   renderBar() {
     this.barChartLabels[this.id] = this.xaxis;
     this.barChartData[this.id] = [
-      { data: this.yaxis, label: this._label[this.id] }
+      { data: this.yaxis, label: this.displayName[this.id] }
     ];
     this.simpleDrop[this.id] = "1";
   }
@@ -176,7 +181,7 @@ export class DragDropComponent implements OnInit{
   }
   renderLine() {
     this.lineChartData[this.id] = [
-      { data: this.yaxis, label: this._label[this.id] }
+      { data: this.yaxis, label: this.displayName[this.id] }
     ];
     this.lineChartLabels[this.id] = this.xaxis;
     this.simpleDrop[this.id] = "1";

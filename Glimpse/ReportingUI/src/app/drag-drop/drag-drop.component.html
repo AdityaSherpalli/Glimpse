@@ -68,12 +68,13 @@
           <div id="{{a+a1}}" dnd-droppable style="height:250px;background-color: white"
             (onDropSuccess)="dropped(a+a1,$event)">
             <div>
-              <h1 *ngIf="simpleDrop[a+a1]"  class="dispName" style="text-align: center;font-size: 19px">{{displayName[a+a1]}}</h1>
+              <h1 *ngIf="simpleDrop[a+a1]" class="dispName" style="text-align: center;font-size: 19px">
+                {{displayName[a+a1]}}</h1>
               <div *ngIf="simpleDrop[a+a1]">
                 <div>
                   <div *ngIf="chartType[a+a1]==='bar'">
-                    <div  style="display: block">
-                      <canvas  baseChart [datasets]="barChartData[a+a1]" [labels]="barChartLabels[a+a1]"
+                    <div style="display: block">
+                      <canvas baseChart [datasets]="barChartData[a+a1]" [labels]="barChartLabels[a+a1]"
                         [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
                     </div>
                   </div>
@@ -96,25 +97,25 @@
                     </div>
                   </div>
                 </div>
-                <div>
-                  <div *ngIf="chartType[a+a1]==='table'">
+                <div class="TableChart">
+                  <div  *ngIf="chartType[a+a1]==='table'">
                     <div style="display: block">
-                      <table border="1">
-                        <thead width="100%">
-                          <tr>
-                            <th *ngFor="let key of keyss[SpName[a+a1]]">
-                              {{key}}
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let item of arrayOne(rows[SpName[a+a1]]); let i = index;">
-                            <td *ngFor="let key of keyss[SpName[a+a1]]">
-                              {{comms[SpName[a+a1]][i][key]}}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                        <table border="1">
+                          <thead width="100%">
+                            <tr>
+                              <th *ngFor="let key of keyss[SpName[a+a1]]">
+                                {{key}}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of arrayOne(rows[SpName[a+a1]]); let i = index;">
+                              <td *ngFor="let key of keyss[SpName[a+a1]]">
+                                {{comms[SpName[a+a1]][i][key]}}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                     </div>
                   </div>
                 </div>

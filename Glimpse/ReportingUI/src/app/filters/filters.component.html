@@ -6,7 +6,7 @@
                 <div class="selectdiv">
                     <select style="margin-right: 20px" class="mdb-select md-form btn btn-success"
                         (change)="onSelectDdl($event)" id="MainDdl">
-                        <option value="" disabled selected>Choose your option</option>
+                        <option value="" disabled selected>Choose your report</option>
                         <option *ngFor="let report of lstRepo" value="{{report.ReportName}}">
                             {{report.DisplayName}}</option>
                     </select>

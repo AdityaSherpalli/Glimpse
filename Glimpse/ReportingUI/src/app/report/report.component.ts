@@ -38,7 +38,7 @@ export class ReportComponent implements OnInit {
   
   ngOnChanges() {
     if(this.reportPresent==true)document.getElementById("noreport").style.display="none";
-    this.name="Report " + this.report.DisplayName;
+    this.name=this.report.DisplayName;
     if(this.report.DisplayName!=null)
     {
       this._getReport.getData(this.config.StoredProcedureName, this.parameters)
